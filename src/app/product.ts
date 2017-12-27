@@ -7,3 +7,10 @@ export class Product {
   stockQuantity: number;
   likesCount: number;
 }
+
+// sku
+// name: string;
+// image: string;
+// price: string;
+// description: blob;
+// stockQuantity: number;
