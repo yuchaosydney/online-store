@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers } from '@angular/http';
 import * as jwt_decode from 'jwt-decode';
+import { User } from '../../models/user';
 
 export const TOKEN_NAME = 'jwt_token';
 
 @Injectable()
 export class AuthService {
 
-  private url = 'api/';
+  private url = 'http://localhost:8080/api/';
   private headers = new Headers({ 'Content-Type': 'application/json' });
 
   constructor(private http: Http) { }
@@ -39,9 +40,9 @@ export class AuthService {
     return !(date.valueOf() > new Date().valueOf());
   }
 
-  login(user): Promise<string> {
+  login(user: User): Promise<string> {
     return this.http
-    .post(`${this.url}/authenticate`, JSON.stringify(user), { headers: this.headers })
+    .post(`${this.url}authenticate`, JSON.stringify(user), { headers: this.headers })
     .toPromise()
     .then(res => res.text());
   }

@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, ErrorHandler } from '@angular/core';
-import { RequestOptions } from '@angular/http';
+import { HttpModule, RequestOptions } from '@angular/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -11,6 +11,7 @@ import { AuthComponent } from './components/auth/auth.component';
 import { HomeComponent } from './components/home/home.component';
 import { AuthRequestOptions } from './services/auth/auth-request';
 import { AuthErrorHandler } from './services/auth/auth-error-handler';
+import { AuthService } from './services/auth/auth.service';
 
 @NgModule({
   declarations: [
@@ -22,9 +23,11 @@ import { AuthErrorHandler } from './services/auth/auth-error-handler';
     BrowserModule,
     AppRoutingModule,
     DashboardModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpModule
   ],
   providers: [
+    AuthService,
     {
       provide: RequestOptions,
       useClass: AuthRequestOptions
