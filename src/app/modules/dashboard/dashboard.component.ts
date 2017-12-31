@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { StoreService } from './store.service';
 import { StoreSummary } from './store-summary';
-import { Product } from '../../product';
+import { Product } from '../../models/product';
 
 @Component({
   selector: 'app-dashboard',

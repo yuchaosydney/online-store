@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, ErrorHandler } from '@angular/core';
 import { RequestOptions } from '@angular/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { DashboardModule } from './modules/dashboard/dashboard.module';
@@ -11,8 +12,6 @@ import { HomeComponent } from './components/home/home.component';
 import { AuthRequestOptions } from './services/auth/auth-request';
 import { AuthErrorHandler } from './services/auth/auth-error-handler';
 
-// testing here
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,7 +21,8 @@ import { AuthErrorHandler } from './services/auth/auth-error-handler';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    DashboardModule
+    DashboardModule,
+    ReactiveFormsModule
   ],
   providers: [
     {
