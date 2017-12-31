@@ -11,6 +11,8 @@ import { HomeComponent } from './components/home/home.component';
 import { AuthRequestOptions } from './services/auth/auth-request';
 import { AuthErrorHandler } from './services/auth/auth-error-handler';
 
+// testing here
+
 @NgModule({
   declarations: [
     AppComponent,
