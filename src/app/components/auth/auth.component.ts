@@ -15,7 +15,7 @@ export class AuthComponent implements OnInit {
 
   constructor(private fb: FormBuilder, private authService: AuthService) {
     this.loginForm = fb.group({
-      'username': [null, Validators.required],
+      'name': [null, Validators.required],
       'password': [null, Validators.required]
     });
   }

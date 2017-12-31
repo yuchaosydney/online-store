@@ -8,10 +8,14 @@ export const TOKEN_NAME = 'jwt_token';
 @Injectable()
 export class AuthService {
 
-  private url = 'http://localhost:8080/api/';
+  private url = '/api/';
   private headers = new Headers({ 'Content-Type': 'application/json' });
 
-  constructor(private http: Http) { }
+  constructor(private http: Http) {
+    // this.headers.append('Accept', 'application/json');
+    // this.headers.append('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, DELETE, PUT');
+    this.headers.append('Access-Control-Allow-Origin', 'http://localhost:8080');
+  }
 
   getToken(): string {
     return localStorage.getItem(TOKEN_NAME);
