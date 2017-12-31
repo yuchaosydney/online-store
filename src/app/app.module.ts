@@ -1,16 +1,14 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, ErrorHandler } from '@angular/core';
+import { RequestOptions } from '@angular/http';
 
 import { AppRoutingModule } from './app-routing.module';
-import { DashboardModule } from './dashboard/dashboard.module';
+import { DashboardModule } from './modules/dashboard/dashboard.module';
 
 import { AppComponent } from './app.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { AuthComponent } from './auth/auth.component';
-import { HomeComponent } from './home/home.component';
-import { RequestOptions } from '@angular/http/src/base_request_options';
+import { AuthComponent } from './components/auth/auth.component';
+import { HomeComponent } from './components/home/home.component';
 import { AuthRequestOptions } from './services/auth/auth-request';
-import { ErrorHandler } from '@angular/core/src/error_handler';
 import { AuthErrorHandler } from './services/auth/auth-error-handler';
 
 @NgModule({
