@@ -11,11 +11,7 @@ export class AuthService {
   private url = '/api/';
   private headers = new Headers({ 'Content-Type': 'application/json' });
 
-  constructor(private http: Http) {
-    // this.headers.append('Accept', 'application/json');
-    // this.headers.append('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, DELETE, PUT');
-    this.headers.append('Access-Control-Allow-Origin', 'http://localhost:8080');
-  }
+  constructor(private http: Http) {}
 
   getToken(): string {
     return localStorage.getItem(TOKEN_NAME);
