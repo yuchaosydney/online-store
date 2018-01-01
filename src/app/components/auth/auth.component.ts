@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { User } from '../../models/user';
 import { AuthService } from '../../services/auth/auth.service';
 import { useAnimation } from '@angular/core/src/animation/dsl';
+import { cleanSession } from 'selenium-webdriver/safari';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-auth',
@@ -13,7 +15,7 @@ export class AuthComponent implements OnInit {
 
   loginForm: FormGroup;
 
-  constructor(private fb: FormBuilder, private authService: AuthService) {
+  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) {
     this.loginForm = fb.group({
       'name': [null, Validators.required],
       'password': [null, Validators.required]
@@ -21,8 +23,18 @@ export class AuthComponent implements OnInit {
   }
 
   login (user: User) {
-    console.log('logging in....', user);
-    this.authService.login(user);
+    this.authService.login(user).subscribe(
+      result => {
+        if (result.success) {
+          console.log(result.token);
+          this.authService.setToken(result.token);
+          this.router.navigate(['/dashboard']);
+        } else {
+          console.log('failed...');
+        }
+      },
+      error => console.log(error)
+    );
   }
 
   ngOnInit() {

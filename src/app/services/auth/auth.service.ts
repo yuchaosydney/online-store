@@ -2,6 +2,9 @@ import { Injectable } from '@angular/core';
 import { Http, Response, Headers } from '@angular/http';
 import * as jwt_decode from 'jwt-decode';
 import { User } from '../../models/user';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/operator/map';
 
 export const TOKEN_NAME = 'jwt_token';
 
@@ -40,10 +43,28 @@ export class AuthService {
     return !(date.valueOf() > new Date().valueOf());
   }
 
-  login(user: User): Promise<string> {
+  login(user: User): Observable<any> {
     return this.http
-    .post(`${this.url}authenticate`, JSON.stringify(user), { headers: this.headers })
-    .toPromise()
-    .then(res => res.text());
+        .post(`${this.url}authenticate`, JSON.stringify(user), { headers: this.headers })
+        .map(this.parseData)
+        .catch(this.handleError);
+  }
+
+  // This method parses the data to JSON
+  private parseData(res: Response)  {
+    return res.json() || [];
+  }
+
+  // Displays the error message
+  private handleError(error: Response | any) {
+    let errorMessage: string;
+
+    errorMessage = error.message ? error.message : error.toString();
+
+    // In real world application, call to log error to remote server
+    // logError(error);
+
+    // This returns another Observable for the observer to subscribe to
+    return Observable.throw(errorMessage);
   }
 }

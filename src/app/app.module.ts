@@ -12,6 +12,7 @@ import { HomeComponent } from './components/home/home.component';
 import { AuthRequestOptions } from './services/auth/auth-request';
 import { AuthErrorHandler } from './services/auth/auth-error-handler';
 import { AuthService } from './services/auth/auth.service';
+import { AuthGuard } from './services/auth/auth.guard';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { AuthService } from './services/auth/auth.service';
   ],
   providers: [
     AuthService,
+    AuthGuard,
     {
       provide: RequestOptions,
       useClass: AuthRequestOptions
