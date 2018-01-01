@@ -1,6 +1,7 @@
 <div class="container auth">
   <div class="panel">
-    <div class="row">
+    <div class="alert alert-danger" *ngIf="error">{{error}}</div>
+    <div class="row">  
       <div class="col-lg-12">
         <form id="login-form" [formGroup]="loginForm" role="form" style="display: block;" (ngSubmit)="login(loginForm.value)">
           <div class="form-group">

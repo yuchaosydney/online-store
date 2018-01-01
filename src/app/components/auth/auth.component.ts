@@ -14,11 +14,12 @@ import { Router } from '@angular/router';
 export class AuthComponent implements OnInit {
 
   loginForm: FormGroup;
+  error: string;
 
   constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) {
     this.loginForm = fb.group({
       'name': [null, Validators.required],
-      'password': [null, Validators.required]
+      'password': ['', Validators.required]
     });
   }
 
@@ -26,11 +27,10 @@ export class AuthComponent implements OnInit {
     this.authService.login(user).subscribe(
       result => {
         if (result.success) {
-          console.log(result.token);
           this.authService.setToken(result.token);
           this.router.navigate(['/dashboard']);
         } else {
-          console.log('failed...');
+          this.error = result.message;
         }
       },
       error => console.log(error)
