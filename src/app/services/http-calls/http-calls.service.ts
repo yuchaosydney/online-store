@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Http, Response, Headers } from '@angular/http';
+import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
+import { AuthRequestOptions } from '../auth/auth-request';
 
 @Injectable()
 export class HttpCallsService {
@@ -8,7 +9,10 @@ export class HttpCallsService {
   private url = '/api/';
   private headers = new Headers({ 'Content-Type': 'application/json' });
 
-  constructor(private http: Http) { }
+  constructor(private http: Http, private requestOptions: RequestOptions) {
+     this.headers = this.requestOptions.headers;
+     this.headers.append('Content-Type', 'application/json');
+  }
 
   postRequest(path, obj): Observable<any> {
     return this.http
@@ -18,6 +22,7 @@ export class HttpCallsService {
   }
 
   getRequest(path): Observable<any> {
+    console.log('getRequest..........', this.headers);
     return this.http
     .get(`${this.url}${path}`, { headers: this.headers })
     .map(this.parseData)
