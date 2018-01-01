@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { StoreService } from './store.service';
 import { StoreSummary } from './store-summary';
 import { Product } from '../../models/product';
+import { TOKEN_NAME } from '../../services/auth/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -15,7 +17,7 @@ export class DashboardComponent implements OnInit {
   salesSum; StoreSummary;
   topSellingProducts: Product[];
 
-  constructor(private storeService: StoreService) {}
+  constructor(private storeService: StoreService, private router: Router) {}
 
   getNewCustomersCount(): void {
     this.storeService.getNewCustomersCount().then(
@@ -39,6 +41,11 @@ export class DashboardComponent implements OnInit {
     this.storeService.getTopSellingProducts().then( topSellingProducts =>
       this.topSellingProducts = topSellingProducts
     );
+  }
+
+  logout(): void {
+    localStorage.removeItem(TOKEN_NAME);
+    this.router.navigate(['/login']);
   }
 
   ngOnInit(): void {
