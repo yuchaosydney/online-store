@@ -13,6 +13,8 @@ import { AuthRequestOptions } from './services/auth/auth-request';
 import { AuthErrorHandler } from './services/auth/auth-error-handler';
 import { AuthService } from './services/auth/auth.service';
 import { AuthGuard } from './services/auth/auth.guard';
+import { ProductsService } from './services/product/products.service';
+import { HttpCallsService } from './services/http-calls/http-calls.service';
 
 @NgModule({
   declarations: [
@@ -30,6 +32,8 @@ import { AuthGuard } from './services/auth/auth.guard';
   providers: [
     AuthService,
     AuthGuard,
+    ProductsService,
+    HttpCallsService,
     {
       provide: RequestOptions,
       useClass: AuthRequestOptions

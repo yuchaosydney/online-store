@@ -12,6 +12,11 @@
 		</div>
 	</div>
 	<h3 class="mt-4">Top selling products</h3>
+	<table class="table table-striped">
+		<tr *ngFor="let product of products">
+			<td>{{product.name}}</td>
+		</tr>
+	</table>
 	<div class="row">
 		<div class="col-3 pb-4" *ngFor="let product of topSellingProducts">
 			<app-product-card [product]="product"></app-product-card>

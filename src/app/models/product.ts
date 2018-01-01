@@ -1,16 +1,9 @@
 export class Product {
   name: string;
-  rating: number;
-  image: string;
-  price: string;
-  quantitySold: number;
-  stockQuantity: number;
-  likesCount: number;
+  sku: string;
+  description: string;
+  price: Number;
+  images: Array<string>;
 }
 
-// sku
-// name: string;
-// image: string;
-// price: string;
-// description: blob;
-// stockQuantity: number;
+// TODO: Add stock number support

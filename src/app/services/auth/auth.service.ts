@@ -5,16 +5,14 @@ import { User } from '../../models/user';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
+import { HttpCallsService } from '../http-calls/http-calls.service';
 
 export const TOKEN_NAME = 'jwt_token';
 
 @Injectable()
 export class AuthService {
 
-  private url = '/api/';
-  private headers = new Headers({ 'Content-Type': 'application/json' });
-
-  constructor(private http: Http) {}
+  constructor(private httpCallsService: HttpCallsService) {}
 
   getToken(): string {
     return localStorage.getItem(TOKEN_NAME);
@@ -44,27 +42,7 @@ export class AuthService {
   }
 
   login(user: User): Observable<any> {
-    return this.http
-        .post(`${this.url}authenticate`, JSON.stringify(user), { headers: this.headers })
-        .map(this.parseData)
-        .catch(this.handleError);
+    return this.httpCallsService.postRequest('authenticate', user);
   }
 
-  // This method parses the data to JSON
-  private parseData(res: Response)  {
-    return res.json() || [];
-  }
-
-  // Displays the error message
-  private handleError(error: Response | any) {
-    let errorMessage: string;
-
-    errorMessage = error.message ? error.message : error.toString();
-
-    // In real world application, call to log error to remote server
-    // logError(error);
-
-    // This returns another Observable for the observer to subscribe to
-    return Observable.throw(errorMessage);
-  }
 }

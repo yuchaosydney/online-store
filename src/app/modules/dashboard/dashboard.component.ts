@@ -4,6 +4,7 @@ import { StoreSummary } from './store-summary';
 import { Product } from '../../models/product';
 import { TOKEN_NAME } from '../../services/auth/auth.service';
 import { Router } from '@angular/router';
+import { ProductsService } from '../../services/product/products.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -16,8 +17,9 @@ export class DashboardComponent implements OnInit {
   activeUsersCount: StoreSummary;
   salesSum; StoreSummary;
   topSellingProducts: Product[];
+  products: Product[];
 
-  constructor(private storeService: StoreService, private router: Router) {}
+  constructor(private storeService: StoreService, private router: Router, private productsService: ProductsService) {}
 
   getNewCustomersCount(): void {
     this.storeService.getNewCustomersCount().then(
@@ -37,6 +39,17 @@ export class DashboardComponent implements OnInit {
     );
   }
 
+  getAllProducts () {
+    this.productsService.getAllProducts().subscribe(
+      result => {
+        if (result.success) {
+          this.products = result.products;
+        }
+      },
+      error => console.log(error)
+    );
+  }
+
   getTopSellingProducts(): void {
     this.storeService.getTopSellingProducts().then( topSellingProducts =>
       this.topSellingProducts = topSellingProducts
@@ -53,6 +66,7 @@ export class DashboardComponent implements OnInit {
     this.getActiveUsersCount();
     this.getSalesSum();
     this.getTopSellingProducts();
+    this.getAllProducts();
   }
 
 }
