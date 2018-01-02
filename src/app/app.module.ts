@@ -9,6 +9,7 @@ import { DashboardModule } from './modules/dashboard/dashboard.module';
 import { AppComponent } from './app.component';
 import { AuthComponent } from './components/auth/auth.component';
 import { HomeComponent } from './components/home/home.component';
+import { ProductFormComponent } from './components/product-form/product-form.component';
 import { AuthRequestOptions } from './services/auth/auth-request';
 import { AuthErrorHandler } from './services/auth/auth-error-handler';
 import { AuthService } from './services/auth/auth.service';
@@ -16,18 +17,24 @@ import { AuthGuard } from './services/auth/auth.guard';
 import { ProductsService } from './services/product/products.service';
 import { HttpCallsService } from './services/http-calls/http-calls.service';
 
+// bootstrap stuff
+import { ModalModule } from 'ngx-bootstrap/modal';
+
 @NgModule({
   declarations: [
     AppComponent,
     AuthComponent,
-    HomeComponent
+    HomeComponent,
+    ProductFormComponent
   ],
+  entryComponents: [ProductFormComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
     DashboardModule,
     ReactiveFormsModule,
-    HttpModule
+    HttpModule,
+    ModalModule.forRoot()
   ],
   providers: [
     AuthService,

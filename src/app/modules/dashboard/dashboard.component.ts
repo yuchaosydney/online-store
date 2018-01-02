@@ -6,6 +6,10 @@ import { TOKEN_NAME } from '../../services/auth/auth.service';
 import { Router } from '@angular/router';
 import { ProductsService } from '../../services/product/products.service';
 
+import { BsModalService } from 'ngx-bootstrap/modal';
+import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
+import { ProductFormComponent } from '../../components/product-form/product-form.component';
+
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -18,7 +22,12 @@ export class DashboardComponent implements OnInit {
   salesSum; StoreSummary;
   products: Product[];
 
-  constructor(private storeService: StoreService, private router: Router, private productsService: ProductsService) {}
+  modalRef: BsModalRef;
+
+  constructor(private storeService: StoreService,
+    private router: Router,
+    private productsService: ProductsService,
+    private modalService: BsModalService) {}
 
   getNewCustomersCount(): void {
     this.storeService.getNewCustomersCount().then(
@@ -52,6 +61,10 @@ export class DashboardComponent implements OnInit {
   logout(): void {
     localStorage.removeItem(TOKEN_NAME);
     this.router.navigate(['/login']);
+  }
+
+  openProductFormModal() {
+    this.modalService.show(ProductFormComponent);
   }
 
   ngOnInit(): void {

@@ -18,7 +18,7 @@
 				<h3 class="mt-4">Products</h3>
 			</div>
 			<div class="col-md-6 text-right">
-				<button type="button" class="btn btn-success" (click)="logout()">Create a Product</button>
+				<button type="button" class="btn btn-success" (click)="openProductFormModal()">Create a Product</button>
 			</div>
 		</div>
 		
@@ -57,3 +57,17 @@
 		</table>
 	</div>
 </div>
+
+
+
+<ng-template #template>
+		<div class="modal-header">
+			<h4 class="modal-title pull-left">Modal</h4>
+			<button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+				<span aria-hidden="true">&times;</span>
+			</button>
+		</div>
+		<div class="modal-body">
+			This is a modal.
+		</div>
+	</ng-template>

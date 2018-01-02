@@ -22,7 +22,6 @@ export class HttpCallsService {
   }
 
   getRequest(path): Observable<any> {
-    console.log('getRequest..........', this.headers);
     return this.http
     .get(`${this.url}${path}`, { headers: this.headers })
     .map(this.parseData)
