@@ -9,7 +9,6 @@ export class AuthRequestOptions extends BaseRequestOptions {
     const token = localStorage.getItem(TOKEN_NAME);
     if (token) {
       this.headers.append(AUTH_HEADER_KEY, `${token}`);
-      console.log('AuthRequestOptions........', this.headers);
     }
   }
 }

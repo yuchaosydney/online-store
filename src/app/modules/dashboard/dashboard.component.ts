@@ -16,7 +16,6 @@ export class DashboardComponent implements OnInit {
   newCustomersCount: StoreSummary;
   activeUsersCount: StoreSummary;
   salesSum; StoreSummary;
-  topSellingProducts: Product[];
   products: Product[];
 
   constructor(private storeService: StoreService, private router: Router, private productsService: ProductsService) {}
@@ -50,12 +49,6 @@ export class DashboardComponent implements OnInit {
     );
   }
 
-  getTopSellingProducts(): void {
-    this.storeService.getTopSellingProducts().then( topSellingProducts =>
-      this.topSellingProducts = topSellingProducts
-    );
-  }
-
   logout(): void {
     localStorage.removeItem(TOKEN_NAME);
     this.router.navigate(['/login']);
@@ -65,7 +58,6 @@ export class DashboardComponent implements OnInit {
     this.getNewCustomersCount();
     this.getActiveUsersCount();
     this.getSalesSum();
-    this.getTopSellingProducts();
     this.getAllProducts();
   }
 
