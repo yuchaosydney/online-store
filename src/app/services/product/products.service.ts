@@ -10,7 +10,10 @@ export class ProductsService {
   constructor(private httpCallsService: HttpCallsService) { }
 
   getAllProducts(): Observable<any> {
-
     return this.httpCallsService.getRequest('product/all');
+  }
+
+  createProduct(product: Product): Observable<any> {
+    return this.httpCallsService.postRequest('product/create', product);
   }
 }
