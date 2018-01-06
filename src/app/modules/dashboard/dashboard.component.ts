@@ -64,7 +64,8 @@ export class DashboardComponent implements OnInit {
   }
 
   openProductFormModal() {
-    this.modalService.show(ProductFormComponent);
+    this.modalRef = this.modalService.show(ProductFormComponent);
+    this.modalRef.content.products = this.products;
   }
 
   ngOnInit(): void {

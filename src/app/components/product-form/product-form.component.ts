@@ -12,6 +12,7 @@ import {Product} from '../../models/product';
 export class ProductFormComponent implements OnInit {
 
   productForm: FormGroup;
+  products: Product[];
 
   constructor(public bsModalRef: BsModalRef, private fb: FormBuilder, private productsService: ProductsService) {
     this.productForm = fb.group({
@@ -26,16 +27,13 @@ export class ProductFormComponent implements OnInit {
 
   saveProduct() {
     const formModel = this.productForm.value;
-    console.log('saving product......', formModel);
-
     const product = new Product(formModel.productName, formModel.productDesc, formModel.productPrice,  []);
-
     this.productsService.createProduct(product).subscribe(
       result => {
-        console.log('---result-------', result);
+        this.products.unshift(result.instance);
+        this.bsModalRef.hide();
       },
       error => console.log(error)
-    );;
+    );
   }
-
 }
