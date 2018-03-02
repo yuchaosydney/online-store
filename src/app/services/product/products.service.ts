@@ -16,4 +16,8 @@ export class ProductsService {
   createProduct(product: Product): Observable<any> {
     return this.httpCallsService.postRequest('product/create', product);
   }
+
+  editProduct(id: string, product: Product): Observable<any> {
+    return this.httpCallsService.putRequest(`product/${id}/edit`, product);
+  }
 }

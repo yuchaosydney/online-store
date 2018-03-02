@@ -17,35 +17,13 @@ import { ProductFormComponent } from '../../components/product-form/product-form
 })
 export class DashboardComponent implements OnInit {
 
-  newCustomersCount: StoreSummary;
-  activeUsersCount: StoreSummary;
-  salesSum; StoreSummary;
   products: Product[];
-
   modalRef: BsModalRef;
 
   constructor(private storeService: StoreService,
     private router: Router,
     private productsService: ProductsService,
     private modalService: BsModalService) {}
-
-  getNewCustomersCount(): void {
-    this.storeService.getNewCustomersCount().then(
-      newCustomersCount => this.newCustomersCount = newCustomersCount
-    );
-  }
-
-  getActiveUsersCount(): void {
-    this.storeService.getActiveUsersCount().then( activeUsersCount =>
-      this.activeUsersCount = activeUsersCount
-    );
-  }
-
-  getSalesSum(): void {
-    this.storeService.getSalesSum().then( salesSum =>
-      this.salesSum = salesSum
-    );
-  }
 
   getAllProducts () {
     this.productsService.getAllProducts().subscribe(
@@ -68,10 +46,15 @@ export class DashboardComponent implements OnInit {
     this.modalRef.content.products = this.products;
   }
 
+  editProductFormModal() {
+    this.modalRef = this.modalService.show(ProductFormComponent);
+    this.modalRef.content.products = this.products;
+  }
+
   ngOnInit(): void {
-    this.getNewCustomersCount();
-    this.getActiveUsersCount();
-    this.getSalesSum();
+    // this.getNewCustomersCount();
+    // this.getActiveUsersCount();
+    // this.getSalesSum();
     this.getAllProducts();
   }
 

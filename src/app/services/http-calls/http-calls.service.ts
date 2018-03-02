@@ -28,6 +28,13 @@ export class HttpCallsService {
     .catch(this.handleError);
   }
 
+  putRequest(path, obj): Observable<any> {
+    return this.http
+      .put(`${this.url}${path}`, JSON.stringify(obj), { headers: this.headers })
+      .map(this.parseData)
+      .catch(this.handleError);
+  }
+
   // This method parses the data to JSON
   private parseData(res: Response)  {
     return res.json() || [];

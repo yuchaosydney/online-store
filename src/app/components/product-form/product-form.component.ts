@@ -13,6 +13,7 @@ export class ProductFormComponent implements OnInit {
 
   productForm: FormGroup;
   products: Product[];
+  isEditing: boolean;
 
   constructor(public bsModalRef: BsModalRef, private fb: FormBuilder, private productsService: ProductsService) {
     this.productForm = fb.group({
@@ -23,6 +24,7 @@ export class ProductFormComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.isEditing = false;
   }
 
   saveProduct() {
