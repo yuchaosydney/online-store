@@ -46,15 +46,14 @@ export class DashboardComponent implements OnInit {
     this.modalRef.content.products = this.products;
   }
 
-  editProductFormModal() {
-    this.modalRef = this.modalService.show(ProductFormComponent);
-    this.modalRef.content.products = this.products;
+  editProductFormModal(product: Product) {
+    const initialState = {
+      editingProduct: product
+    };
+    this.modalRef = this.modalService.show(ProductFormComponent, {initialState});
   }
 
   ngOnInit(): void {
-    // this.getNewCustomersCount();
-    // this.getActiveUsersCount();
-    // this.getSalesSum();
     this.getAllProducts();
   }
 
