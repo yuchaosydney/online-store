@@ -20,4 +20,8 @@ export class ProductsService {
   editProduct(product: Product): Observable<any> {
     return this.httpCallsService.putRequest(`product/${product._id}/edit`, product);
   }
+
+  deleteProduct(product: Product): Observable<any> {
+    return this.httpCallsService.deleteRequest(`product/${product._id}/delete`);
+  }
 }

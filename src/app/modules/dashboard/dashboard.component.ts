@@ -9,6 +9,7 @@ import { ProductsService } from '../../services/product/products.service';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { ProductFormComponent } from '../../components/product-form/product-form.component';
+import {DeleteProductConfirmDialogComponent} from "../../components/delete-product-confirm-dialog/delete-product-confirm-dialog.component";
 
 @Component({
   selector: 'app-dashboard',
@@ -52,6 +53,14 @@ export class DashboardComponent implements OnInit {
       isEditing: true
     };
     this.modalRef = this.modalService.show(ProductFormComponent, {initialState});
+  }
+
+  openDeleteProductModal(product: Product) {
+    const initialState = {
+      deleteProduct: product
+    };
+    this.modalRef = this.modalService.show(DeleteProductConfirmDialogComponent, {initialState});
+    this.modalRef.content.products = this.products;
   }
 
   ngOnInit(): void {

@@ -19,15 +19,17 @@ import { HttpCallsService } from './services/http-calls/http-calls.service';
 
 // bootstrap stuff
 import { ModalModule } from 'ngx-bootstrap/modal';
+import { DeleteProductConfirmDialogComponent } from './components/delete-product-confirm-dialog/delete-product-confirm-dialog.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AuthComponent,
     HomeComponent,
-    ProductFormComponent
+    ProductFormComponent,
+    DeleteProductConfirmDialogComponent
   ],
-  entryComponents: [ProductFormComponent],
+  entryComponents: [ProductFormComponent, DeleteProductConfirmDialogComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

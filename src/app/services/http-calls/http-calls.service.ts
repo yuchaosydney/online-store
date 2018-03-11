@@ -35,6 +35,13 @@ export class HttpCallsService {
       .catch(this.handleError);
   }
 
+  deleteRequest(path): Observable<any> {
+    return this.http
+      .delete(`${this.url}${path}`, { headers: this.headers })
+      .map(this.parseData)
+      .catch(this.handleError);
+  }
+
   // This method parses the data to JSON
   private parseData(res: Response)  {
     return res.json() || [];
