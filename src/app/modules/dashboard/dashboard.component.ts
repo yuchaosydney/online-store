@@ -48,7 +48,8 @@ export class DashboardComponent implements OnInit {
 
   editProductFormModal(product: Product) {
     const initialState = {
-      editingProduct: product
+      editingProduct: product,
+      isEditing: true
     };
     this.modalRef = this.modalService.show(ProductFormComponent, {initialState});
   }

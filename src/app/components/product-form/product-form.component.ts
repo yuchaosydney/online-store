@@ -26,7 +26,6 @@ export class ProductFormComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log('---------------', this.editingProduct);
     if (this.productForm ) {
       this.productForm.setValue({
         'productName': this.editingProduct.name,
@@ -37,8 +36,14 @@ export class ProductFormComponent implements OnInit {
 
   saveProduct() {
     const formModel = this.productForm.value;
+    console.log(this.isEditing);
     if (this.isEditing) {
-      // this.productsService.editProduct()
+      this.productsService.editProduct(this.editingProduct).subscribe(
+        result => {
+          this.bsModalRef.hide();
+        },
+        error => console.log(error)
+      );
     } else {
       const product = new Product(formModel.productName, formModel.productDesc, formModel.productPrice,  []);
       this.productsService.createProduct(product).subscribe(
