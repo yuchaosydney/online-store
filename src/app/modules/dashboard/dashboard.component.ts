@@ -1,15 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { StoreService } from './store.service';
-import { StoreSummary } from './store-summary';
 import { Product } from '../../models/product';
 import { TOKEN_NAME } from '../../services/auth/auth.service';
 import { Router } from '@angular/router';
 import { ProductsService } from '../../services/product/products.service';
-
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { ProductFormComponent } from '../../components/product-form/product-form.component';
-import {DeleteProductConfirmDialogComponent} from "../../components/delete-product-confirm-dialog/delete-product-confirm-dialog.component";
+import { DeleteProductConfirmDialogComponent } from '../../components/delete-product-confirm-dialog/delete-product-confirm-dialog.component';
+import { Store } from '@ngrx/store';
+import { AppState} from '../../models/app-state';
+import {Observable} from 'rxjs/Observable';
+import * as productActions from '../../actions/products.actions';
 
 @Component({
   selector: 'app-dashboard',
@@ -18,23 +19,24 @@ import {DeleteProductConfirmDialogComponent} from "../../components/delete-produ
 })
 export class DashboardComponent implements OnInit {
 
+  products$: Observable<any>;
   products: Product[];
   modalRef: BsModalRef;
 
-  constructor(private storeService: StoreService,
+  constructor(
+    private productStore: Store<AppState>,
     private router: Router,
     private productsService: ProductsService,
-    private modalService: BsModalService) {}
+    private modalService: BsModalService
+  ) {
+    this.products$ = this.productStore.select('products');
+    this.products$.subscribe(state => {
+      this.products = state.products;
+    });
+  }
 
   getAllProducts () {
-    this.productsService.getAllProducts().subscribe(
-      result => {
-        if (result.success) {
-          this.products = result.products;
-        }
-      },
-      error => console.log(error)
-    );
+    this.productStore.dispatch(new productActions.LoadProductsAction());
   }
 
   logout(): void {
