@@ -2,14 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { Product } from '../../models/product';
 import { TOKEN_NAME } from '../../services/auth/auth.service';
 import { Router } from '@angular/router';
-import { ProductsService } from '../../services/product/products.service';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { ProductFormComponent } from '../../components/product-form/product-form.component';
 import { DeleteProductConfirmDialogComponent } from '../../components/delete-product-confirm-dialog/delete-product-confirm-dialog.component';
 import { Store } from '@ngrx/store';
 import { AppState} from '../../models/app-state';
-import {Observable} from 'rxjs/Observable';
+import { Observable } from 'rxjs/Observable';
 import * as productActions from '../../actions/products.actions';
 
 @Component({
@@ -26,7 +25,6 @@ export class DashboardComponent implements OnInit {
   constructor(
     private productStore: Store<AppState>,
     private router: Router,
-    private productsService: ProductsService,
     private modalService: BsModalService
   ) {
     this.products$ = this.productStore.select('products');

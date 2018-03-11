@@ -24,6 +24,7 @@ import { StoreModule } from '@ngrx/store';
 import { productReducer } from './reducers/products.reducer';
 import { ProductEffects } from './effects/product.effects';
 import { EffectsModule } from '@ngrx/effects';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { EffectsModule } from '@ngrx/effects';
     HttpModule,
     ModalModule.forRoot(),
     StoreModule.forRoot({products: productReducer}),
-    EffectsModule.forRoot([ProductEffects])
+    EffectsModule.forRoot([ProductEffects]),
+    StoreDevtoolsModule.instrument()
   ],
   providers: [
     AuthService,
