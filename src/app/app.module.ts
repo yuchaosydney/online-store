@@ -20,6 +20,7 @@ import { HttpCallsService } from './services/http-calls/http-calls.service';
 // bootstrap stuff
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { DeleteProductConfirmDialogComponent } from './components/delete-product-confirm-dialog/delete-product-confirm-dialog.component';
+
 import { StoreModule } from '@ngrx/store';
 import { productReducer } from './reducers/products.reducer';
 import { ProductEffects } from './effects/product.effects';

@@ -16,4 +16,9 @@ export class ProductEffects {
   @Effect() loadProducts$ = this.actions$
     .ofType(productActions.LOAD_PRODUCTS)
     .switchMap(() => this.productService.getAllProducts().map(products => (new productActions.LoadProductsSuccessAction(products))));
+
+  @Effect() deleteProduct$ = this.actions$
+    .ofType(productActions.DELETE_PRODUCT)
+    .switchMap(action => this.productService.deleteProduct(action.payload)
+      .map(res => (new productActions.DeleteProductSuccessAction(action.payload))));
 }

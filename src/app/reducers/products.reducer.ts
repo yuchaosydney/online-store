@@ -5,6 +5,9 @@ export function productReducer(state = [], action: productActions.Action) {
     case productActions.LOAD_PRODUCTS_SUCCESS: {
       return action.payload;
     }
+    case productActions.DELETE_PRODUCT_SUCCESS: {
+      return state.products.filter(product => product._id !== action.payload);
+    }
     default :  {
       return state;
     }
