@@ -29,7 +29,7 @@ export class DashboardComponent implements OnInit {
   ) {
     this.products$ = this.productStore.select('products');
     this.products$.subscribe(state => {
-      this.products = state.products;
+      this.products = state;
     });
   }
 
