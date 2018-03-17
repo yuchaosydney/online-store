@@ -8,6 +8,10 @@ export function productReducer(state = [], action: productActions.Action) {
     case productActions.DELETE_PRODUCT_SUCCESS: {
       return state.filter(product => product._id !== action.payload._id);
     }
+    case productActions.CREATE_PRODUCT_SUCCESS: {
+      state.unshift(action.payload);
+      return state;
+    }
     default :  {
       return state;
     }

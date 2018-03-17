@@ -1,9 +1,12 @@
 import {Product} from '../models/product';
+import {Action} from '@ngrx/store';
 
 export const LOAD_PRODUCTS = 'LOAD_PRODUCTS';
 export const LOAD_PRODUCTS_SUCCESS = 'LOAD_PRODUCTS_SUCCESS';
 export const DELETE_PRODUCT = 'DELETE_PRODUCT';
 export const DELETE_PRODUCT_SUCCESS = 'DELETE_PRODUCT_SUCCESS';
+export const CREATE_PRODUCT = 'CREATE_PRODUCT';
+export const CREATE_PRODUCT_SUCCESS = 'CREATE_PRODUCT_SUCCESS';
 
 export class LoadProductsAction {
   readonly type = LOAD_PRODUCTS;
@@ -25,9 +28,21 @@ export class DeleteProductSuccessAction {
   constructor(public payload: Product) {}
 }
 
+export class CreateProductAction {
+  readonly type = CREATE_PRODUCT;
+  constructor(public payload: Product) {}
+}
+
+export class CreateProductSuccessAction {
+  readonly type = CREATE_PRODUCT_SUCCESS;
+  constructor(public payload: Product) {}
+}
+
 export type Action
   = LoadProductsAction
   | LoadProductsSuccessAction
   | DeleteProductAction
   | DeleteProductSuccessAction
+  | CreateProductAction
+  | CreateProductSuccessAction
   ;
