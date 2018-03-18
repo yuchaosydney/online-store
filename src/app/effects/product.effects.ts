@@ -20,10 +20,15 @@ export class ProductEffects {
   @Effect() deleteProduct$ = this.actions$
     .ofType(productActions.DELETE_PRODUCT)
     .switchMap((action: productActions.DeleteProductAction) => this.productService.deleteProduct(action.payload)
-      .map(res => (new productActions.DeleteProductSuccessAction(action.payload))));
+      .map(res => (new productActions.DeleteProductSuccessAction(action.payload, action.bsModalRef))));
 
   @Effect() createProduct$ = this.actions$
     .ofType(productActions.CREATE_PRODUCT)
     .switchMap((action: productActions.CreateProductAction) => this.productService.createProduct(action.payload)
-      .map(res => (new productActions.CreateProductSuccessAction(res))));
+      .map(res => (new productActions.CreateProductSuccessAction(res, action.bsModalRef))));
+
+  @Effect() editProduct$ = this.actions$
+    .ofType(productActions.EDIT_PRODUCT)
+    .switchMap((action: productActions.EditProductAction) => this.productService.editProduct(action.payload)
+    .map(res => (new productActions.EditProductSuccessAction(res, action.bsModalRef))));
 }

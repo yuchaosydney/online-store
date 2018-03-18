@@ -6,10 +6,16 @@ export function productReducer(state = [], action: productActions.Action) {
       return action.payload;
     }
     case productActions.DELETE_PRODUCT_SUCCESS: {
+      action.bsModalRef.hide();
       return state.filter(product => product._id !== action.payload._id);
     }
     case productActions.CREATE_PRODUCT_SUCCESS: {
       state.unshift(action.payload);
+      action.bsModalRef.hide();
+      return state;
+    }
+    case productActions.EDIT_PRODUCT_SUCCESS: {
+      action.bsModalRef.hide();
       return state;
     }
     default :  {
