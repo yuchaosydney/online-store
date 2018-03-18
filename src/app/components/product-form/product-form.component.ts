@@ -45,12 +45,6 @@ export class ProductFormComponent implements OnInit {
   saveProduct() {
     if (this.isEditing) {
       this.productStore.dispatch(new productActions.EditProductAction(this.editingProduct, this.bsModalRef));
-      // this.productsService.editProduct(this.editingProduct).subscribe(
-      //   result => {
-      //     this.bsModalRef.hide();
-      //   },
-      //   error => console.log(error)
-      // );
     } else {
       const product = new Product(this.editingProduct.name, this.editingProduct.description, this.editingProduct.price,  []);
       this.productStore.dispatch(new productActions.CreateProductAction(product, this.bsModalRef));
