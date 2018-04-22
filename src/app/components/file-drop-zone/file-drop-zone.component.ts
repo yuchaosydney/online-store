@@ -27,4 +27,9 @@ export class FileDropZoneComponent implements OnInit {
     event.preventDefault();
   }
 
+  uploadAll(event: Event) {
+    event.preventDefault();
+    console.log('-----uploadAll---------');
+  }
+
 }
