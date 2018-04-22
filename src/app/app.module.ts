@@ -4,7 +4,6 @@ import { HttpModule, RequestOptions } from '@angular/http';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
-import { DashboardModule } from './modules/dashboard/dashboard.module';
 
 import { AppComponent } from './app.component';
 import { AuthComponent } from './components/auth/auth.component';
@@ -26,6 +25,8 @@ import { productReducer } from './reducers/products.reducer';
 import { ProductEffects } from './effects/product.effects';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { FileDropZoneComponent } from './components/file-drop-zone/file-drop-zone.component';
 
 @NgModule({
   declarations: [
@@ -33,13 +34,14 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
     AuthComponent,
     HomeComponent,
     ProductFormComponent,
-    DeleteProductConfirmDialogComponent
+    DeleteProductConfirmDialogComponent,
+    DashboardComponent,
+    FileDropZoneComponent
   ],
   entryComponents: [ProductFormComponent, DeleteProductConfirmDialogComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    DashboardModule,
     ReactiveFormsModule,
     HttpModule,
     ModalModule.forRoot(),

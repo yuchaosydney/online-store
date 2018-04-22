@@ -1,0 +1,24 @@
+<div class="file-drop-zone">
+  <div class="file-drop-zone__filedrag"
+  (drop)="onDrop($event)"
+  (dragover)="onDragOver($event)">or drop files here</div>
+
+  <table class="table table-hover table-bordered">
+    <thead>
+      <tr>
+        <th>file name</th>
+        <th>Progress</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let file of fileList">
+        <td>
+          {{ file.name }}
+        </td>
+        <td>
+          Progress
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

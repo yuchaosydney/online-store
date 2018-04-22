@@ -4,8 +4,9 @@ import { TOKEN_NAME } from '../../services/auth/auth.service';
 import { Router } from '@angular/router';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
-import { ProductFormComponent } from '../../components/product-form/product-form.component';
-import { DeleteProductConfirmDialogComponent } from '../../components/delete-product-confirm-dialog/delete-product-confirm-dialog.component';
+import { ProductFormComponent } from '../product-form/product-form.component';
+/* tslint:disable:max-line-length */
+import { DeleteProductConfirmDialogComponent } from '../delete-product-confirm-dialog/delete-product-confirm-dialog.component';
 import { Store } from '@ngrx/store';
 import { AppState} from '../../models/app-state';
 import { Observable } from 'rxjs/Observable';
