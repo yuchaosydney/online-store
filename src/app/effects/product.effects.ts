@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ProductsService } from '../services/product/products.service';
+import { FileService } from '../services/file/file.service';
 import { Effect, Actions } from '@ngrx/effects';
 import * as productActions from '../actions/products.actions';
 import 'rxjs/add/operator/switchMap';
@@ -10,6 +11,7 @@ export class ProductEffects {
 
   constructor(
     private productService: ProductsService,
+    private fileService: FileService,
     private actions$: Actions
   ) {}
 
@@ -31,4 +33,13 @@ export class ProductEffects {
     .ofType(productActions.EDIT_PRODUCT)
     .switchMap((action: productActions.EditProductAction) => this.productService.editProduct(action.payload)
     .map(res => (new productActions.EditProductSuccessAction(res, action.bsModalRef))));
+
+  @Effect() uploadImages$ = this.actions$
+    .ofType(productActions.UPLOAD_IMAGE_FILES)
+    .switchMap((action: productActions.UploadImagesAction) => this.fileService.uploadFiles(action.filesPayload)
+      .map(res => {
+        action.productPayload.images = res.map(item => item.filename);
+        console.log('------editing product-----', res);
+        return new productActions.EditProductAction(action.productPayload, action.bsModalRef);
+      }));
 }

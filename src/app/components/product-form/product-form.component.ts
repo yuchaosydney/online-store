@@ -1,7 +1,7 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import {Product} from '../../models/product';
+import { Product } from '../../models/product';
 
 import { Store } from '@ngrx/store';
 import { AppState} from '../../models/app-state';
@@ -25,7 +25,7 @@ export class ProductFormComponent implements OnInit {
   editingProduct: Product;
 
   constructor(
-    private productStore: Store<AppState>,
+    private appStore: Store<AppState>,
     public bsModalRef: BsModalRef,
     private fb: FormBuilder,
     private authService: AuthService
@@ -57,10 +57,15 @@ export class ProductFormComponent implements OnInit {
 
   saveProduct() {
     if (this.isEditing) {
-      this.productStore.dispatch(new productActions.EditProductAction(this.editingProduct, this.bsModalRef));
+      this.appStore.dispatch(new productActions.EditProductAction(this.editingProduct, this.bsModalRef));
     } else {
       const product = new Product(this.editingProduct.name, this.editingProduct.description, this.editingProduct.price,  []);
-      this.productStore.dispatch(new productActions.CreateProductAction(product, this.bsModalRef));
+      this.appStore.dispatch(new productActions.CreateProductAction(product, this.bsModalRef));
     }
+  }
+
+  uploadAll(event) {
+    console.log('--------------', event);
+    this.appStore.dispatch(new productActions.UploadImagesAction(event, this.editingProduct,  this.bsModalRef));
   }
 }

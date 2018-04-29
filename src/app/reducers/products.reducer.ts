@@ -18,6 +18,9 @@ export function productReducer(state = [], action: productActions.Action) {
       action.bsModalRef.hide();
       return state;
     }
+    case productActions.UPLOAD_IMAGE_FILES: {
+      return state;
+    }
     default :  {
       return state;
     }

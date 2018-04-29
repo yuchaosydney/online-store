@@ -14,6 +14,7 @@ import { AuthErrorHandler } from './services/auth/auth-error-handler';
 import { AuthService } from './services/auth/auth.service';
 import { AuthGuard } from './services/auth/auth.guard';
 import { ProductsService } from './services/product/products.service';
+import { FileService } from './services/file/file.service';
 import { HttpCallsService } from './services/http-calls/http-calls.service';
 
 // bootstrap stuff
@@ -53,6 +54,7 @@ import { FileDropZoneComponent } from './components/file-drop-zone/file-drop-zon
     AuthService,
     AuthGuard,
     ProductsService,
+    FileService,
     HttpCallsService,
     {
       provide: RequestOptions,

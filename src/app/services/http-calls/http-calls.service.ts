@@ -21,6 +21,15 @@ export class HttpCallsService {
     .catch(this.handleError);
   }
 
+  postFormDataRequest(path, formData): Observable<any> {
+    const headers = Object.assign(new Headers({}), this.headers);
+    headers.delete('Content-Type');
+    return this.http
+    .post(`${this.url}${path}`, formData, { headers: headers })
+    .map(this.parseData)
+    .catch(this.handleError);
+  }
+
   getRequest(path): Observable<any> {
     return this.http
     .get(`${this.url}${path}`, { headers: this.headers })

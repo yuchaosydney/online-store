@@ -9,6 +9,7 @@ export const CREATE_PRODUCT = 'CREATE_PRODUCT';
 export const CREATE_PRODUCT_SUCCESS = 'CREATE_PRODUCT_SUCCESS';
 export const EDIT_PRODUCT = 'EDIT_PRODUCT';
 export const EDIT_PRODUCT_SUCCESS = 'EDIT_PRODUCT_SUCCESS';
+export const UPLOAD_IMAGE_FILES = 'UPLOAD_IMAGE_FILES';
 
 export class LoadProductsAction {
   readonly type = LOAD_PRODUCTS;
@@ -50,6 +51,11 @@ export class EditProductSuccessAction {
   constructor(public payload: Product, public bsModalRef: BsModalRef) {}
 }
 
+export class UploadImagesAction {
+  readonly type = UPLOAD_IMAGE_FILES;
+  constructor(public filesPayload: File[], public productPayload: Product, public bsModalRef: BsModalRef) {}
+}
+
 export type Action
   = LoadProductsAction
   | LoadProductsSuccessAction
@@ -59,4 +65,5 @@ export type Action
   | CreateProductSuccessAction
   | EditProductAction
   | EditProductSuccessAction
+  | UploadImagesAction
   ;

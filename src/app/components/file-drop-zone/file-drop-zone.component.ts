@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { AppState} from '../../models/app-state';
+import * as productActions from '../../actions/products.actions';
 
 @Component({
   selector: 'app-file-drop-zone',
@@ -7,19 +10,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FileDropZoneComponent implements OnInit {
 
+  @Output()
+  uploadAll: EventEmitter<File[]> = new EventEmitter<File[]>();
+
+  private appStore: Store<AppState>;
   fileList: Array<File>;
 
   constructor() { }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   onDrop(event: DragEvent) {
     event.preventDefault();
     const droppedFiles: Array<File> = Object.keys(event.dataTransfer.files).map(key => event.dataTransfer.files[key]);
     this.fileList = this.fileList
     ? [...this.fileList, ...droppedFiles] : droppedFiles;
-    console.log('------onDrop---------', this.fileList);
   }
 
   onDragOver(event: DragEvent) {
@@ -27,9 +32,9 @@ export class FileDropZoneComponent implements OnInit {
     event.preventDefault();
   }
 
-  uploadAll(event: Event) {
+  uploadAllFiles(event: Event) {
     event.preventDefault();
-    console.log('-----uploadAll---------');
+    this.uploadAll.emit(this.fileList);
   }
 
 }
