@@ -37,11 +37,6 @@ export class ProductFormComponent implements OnInit {
     });
     this.isEditing = false;
 
-    // this.afuConfig = {
-    //   url: `http://localhost:3000/api/file/upload`,
-    //   headers: [{ name: 'x-access-token', value : this.authService.getToken() } ]
-    // };
-
   }
 
   ngOnInit() {

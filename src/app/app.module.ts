@@ -1,13 +1,12 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, ErrorHandler } from '@angular/core';
-import { HttpModule, RequestOptions } from '@angular/http';
+import { HttpModule, RequestOptions, Http } from '@angular/http';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
 import { AuthComponent } from './components/auth/auth.component';
-import { HomeComponent } from './components/home/home.component';
 import { ProductFormComponent } from './components/product-form/product-form.component';
 import { AuthRequestOptions } from './services/auth/auth-request';
 import { AuthErrorHandler } from './services/auth/auth-error-handler';
@@ -33,7 +32,6 @@ import { FileDropZoneComponent } from './components/file-drop-zone/file-drop-zon
   declarations: [
     AppComponent,
     AuthComponent,
-    HomeComponent,
     ProductFormComponent,
     DeleteProductConfirmDialogComponent,
     DashboardComponent,
@@ -55,6 +53,7 @@ import { FileDropZoneComponent } from './components/file-drop-zone/file-drop-zon
     AuthGuard,
     ProductsService,
     FileService,
+    Http,
     HttpCallsService,
     {
       provide: RequestOptions,

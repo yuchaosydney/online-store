@@ -15,6 +15,8 @@ export function productReducer(state = [], action: productActions.Action) {
       return state;
     }
     case productActions.EDIT_PRODUCT_SUCCESS: {
+      console.log('---------reducer--------11----', action.payload);
+      console.log('---------reducer--------11----', state);
       action.bsModalRef.hide();
       return state;
     }

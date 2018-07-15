@@ -2,10 +2,14 @@ import { TestBed, inject } from '@angular/core/testing';
 
 import { FileService } from './file.service';
 
+import { HttpCallsService } from '../http-calls/http-calls.service';
+import { HttpModule } from '@angular/http';
+
 describe('FileService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [FileService]
+      imports: [HttpModule],
+      providers: [FileService, HttpCallsService]
     });
   });
 

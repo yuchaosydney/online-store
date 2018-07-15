@@ -5,6 +5,7 @@ import { Effect, Actions } from '@ngrx/effects';
 import * as productActions from '../actions/products.actions';
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/map';
+import { Product } from '../models/product';
 
 @Injectable()
 export class ProductEffects {
@@ -31,15 +32,21 @@ export class ProductEffects {
 
   @Effect() editProduct$ = this.actions$
     .ofType(productActions.EDIT_PRODUCT)
-    .switchMap((action: productActions.EditProductAction) => this.productService.editProduct(action.payload)
-    .map(res => (new productActions.EditProductSuccessAction(res, action.bsModalRef))));
+    .switchMap((action: productActions.EditProductAction) => {
+      return this.productService.editProduct(action.payload)
+      .map(res => {
+        return new productActions.EditProductSuccessAction(res, action.bsModalRef);
+      });
+    });
 
   @Effect() uploadImages$ = this.actions$
     .ofType(productActions.UPLOAD_IMAGE_FILES)
     .switchMap((action: productActions.UploadImagesAction) => this.fileService.uploadFiles(action.filesPayload)
       .map(res => {
+        console.log('----------res-------', res);
         action.productPayload.images = res.map(item => item.filename);
-        console.log('------editing product-----', res);
-        return new productActions.EditProductAction(action.productPayload, action.bsModalRef);
+        const product = Object.assign(new Product('', '', 0,  []), action.productPayload);
+        product.images = res.map(item => item.filename);
+        return new productActions.EditProductAction(product, action.bsModalRef);
       }));
 }
