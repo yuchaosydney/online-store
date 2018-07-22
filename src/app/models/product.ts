@@ -13,5 +13,3 @@ export class Product {
     this.images = images;
   }
 }
-
-// TODO: Add stock number support
