@@ -11,6 +11,8 @@ import { Product } from '../models/product';
 
 describe('product effects', () => {
 
+  const mockFile = new File([JSON.stringify({hello: 'world'}, null, 2)], 'test-file.jpg', { type: 'image/jpeg'});
+
   const mockProductList = [
     {
       _id: '5b3785a976477f000ea0e3b1',
@@ -77,11 +79,28 @@ describe('product effects', () => {
     });
   });
 
+  describe('uploadImages$', () => {
+    it('should dispatch EditProductAction action', () => {
+      const actions = new Actions(hot('-a-|', {a: new fromActions.UploadImagesAction([mockFile], mockProduct, null)}));
+      const fileService = stubFileService({item: mockFile.name});
+      const effects = new ProductEffects(null , fileService , actions);
+
+      expect(effects.uploadImages$).toBeObservable(cold('-a-|', {a: new fromActions.EditProductAction(mockProduct, null)}));
+    });
+  });
+
   function stubService(response: any): any {
-    const service = jasmine.createSpyObj('service', ['getAllProducts', 'deleteProduct', 'createProduct']);
+    const service = jasmine.createSpyObj('service', ['getAllProducts', 'deleteProduct', 'createProduct', 'fileService']);
     service.getAllProducts.and.returnValue(of(response));
     service.deleteProduct.and.returnValue(of(response));
     service.createProduct.and.returnValue(of(response));
+    service.fileService.and.returnValue(of(response));
+    return service;
+  }
+
+  function stubFileService(response: any): any {
+    const service = jasmine.createSpyObj('service', ['uploadFiles']);
+    service.uploadFiles.and.returnValue(of(response));
     return service;
   }
 });
