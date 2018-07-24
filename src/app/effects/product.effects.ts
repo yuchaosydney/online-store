@@ -43,8 +43,9 @@ export class ProductEffects {
     .ofType(productActions.UPLOAD_IMAGE_FILES)
     .switchMap((action: productActions.UploadImagesAction) => this.fileService.uploadFiles(action.filesPayload)
       .map(res => {
-        action.productPayload.images.push(res.item);
+        action.productPayload.images.push(res[0].filename);
         const product = Object.assign(new Product('', '', 0,  []), action.productPayload);
+        console.log('------------------', product);
         return new productActions.EditProductAction(product, action.bsModalRef);
       }));
 }

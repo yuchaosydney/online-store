@@ -53,7 +53,6 @@ import { FileDropZoneComponent } from './components/file-drop-zone/file-drop-zon
     AuthGuard,
     ProductsService,
     FileService,
-    Http,
     HttpCallsService,
     {
       provide: RequestOptions,
