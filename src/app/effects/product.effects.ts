@@ -45,7 +45,6 @@ export class ProductEffects {
       .map(res => {
         action.productPayload.images.push(res[0].filename);
         const product = Object.assign(new Product('', '', 0,  []), action.productPayload);
-        console.log('------------------', product);
         return new productActions.EditProductAction(product, action.bsModalRef);
       }));
 }

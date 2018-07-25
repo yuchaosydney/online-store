@@ -82,7 +82,7 @@ describe('product effects', () => {
   describe('uploadImages$', () => {
     it('should dispatch EditProductAction action', () => {
       const actions = new Actions(hot('-a-|', {a: new fromActions.UploadImagesAction([mockFile], mockProduct, null)}));
-      const fileService = stubFileService({item: mockFile.name});
+      const fileService = stubFileService([{filename: mockFile.name}]);
       const effects = new ProductEffects(null , fileService , actions);
 
       expect(effects.uploadImages$).toBeObservable(cold('-a-|', {a: new fromActions.EditProductAction(mockProduct, null)}));

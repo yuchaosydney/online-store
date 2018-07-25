@@ -39,7 +39,7 @@ export class HttpCallsService {
 
   putRequest(path, obj): Observable<any> {
     return this.http
-      .put(`${this.url}${path}`, JSON.stringify(obj), { headers: this.headers })
+      .put(`${this.url}${path}`, obj, { headers: this.headers })
       .map(this.parseData)
       .catch(this.handleError);
   }
