@@ -60,7 +60,6 @@ export class ProductFormComponent implements OnInit {
   }
 
   uploadAll(event) {
-    console.log('--------------', event);
     this.appStore.dispatch(new productActions.UploadImagesAction(event, this.editingProduct,  this.bsModalRef));
   }
 }
