@@ -1,7 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AppState} from '../../models/app-state';
-import * as productActions from '../../actions/products.actions';
 
 @Component({
   selector: 'app-file-drop-zone',

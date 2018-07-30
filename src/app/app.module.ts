@@ -7,7 +7,6 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
 import { AuthComponent } from './components/auth/auth.component';
-import { ProductFormComponent } from './components/product-form/product-form.component';
 import { AuthRequestOptions } from './services/auth/auth-request';
 import { AuthErrorHandler } from './services/auth/auth-error-handler';
 import { AuthService } from './services/auth/auth.service';
@@ -18,7 +17,6 @@ import { HttpCallsService } from './services/http-calls/http-calls.service';
 
 // bootstrap stuff
 import { ModalModule } from 'ngx-bootstrap/modal';
-import { DeleteProductConfirmDialogComponent } from './components/delete-product-confirm-dialog/delete-product-confirm-dialog.component';
 
 import { StoreModule } from '@ngrx/store';
 import { productReducer } from './reducers/products.reducer';
@@ -27,6 +25,8 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { FileDropZoneComponent } from './components/file-drop-zone/file-drop-zone.component';
+import { DeleteProductConfirmDialogComponent } from './components/delete-product-confirm-dialog/delete-product-confirm-dialog.component';
+import { ProductFormComponent } from './components/product-form/product-form.component';
 
 @NgModule({
   declarations: [

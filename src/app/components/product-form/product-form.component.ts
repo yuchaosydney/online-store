@@ -7,11 +7,7 @@ import { Store } from '@ngrx/store';
 import { AppState} from '../../models/app-state';
 import * as productActions from '../../actions/products.actions';
 
-import { csLocale } from 'ngx-bootstrap/chronos/i18n/cs';
-
 import { AuthService } from '../../services/auth/auth.service';
-import { FileDropZoneComponent } from '../file-drop-zone/file-drop-zone.component';
-
 
 @Component({
   selector: 'app-product-form',

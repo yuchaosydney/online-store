@@ -45,6 +45,8 @@ export class FileService {
           }
           observer.next(data.Location);
           observer.complete();
+        }).on('httpUploadProgress', progress => {
+          console.log('-------progress----------', (progress.loaded / progress.total));
         });
       });
 
