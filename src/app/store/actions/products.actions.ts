@@ -1,15 +1,15 @@
-import {Product} from '../models/product';
+import {Product} from '../../models/product';
 import {BsModalRef} from 'ngx-bootstrap';
 
-export const LOAD_PRODUCTS = 'LOAD_PRODUCTS';
-export const LOAD_PRODUCTS_SUCCESS = 'LOAD_PRODUCTS_SUCCESS';
-export const DELETE_PRODUCT = 'DELETE_PRODUCT';
-export const DELETE_PRODUCT_SUCCESS = 'DELETE_PRODUCT_SUCCESS';
-export const CREATE_PRODUCT = 'CREATE_PRODUCT';
-export const CREATE_PRODUCT_SUCCESS = 'CREATE_PRODUCT_SUCCESS';
-export const EDIT_PRODUCT = 'EDIT_PRODUCT';
-export const EDIT_PRODUCT_SUCCESS = 'EDIT_PRODUCT_SUCCESS';
-export const UPLOAD_IMAGE_FILES = 'UPLOAD_IMAGE_FILES';
+export const LOAD_PRODUCTS = '[Products] LOAD_PRODUCTS';
+export const LOAD_PRODUCTS_SUCCESS = '[Products] LOAD_PRODUCTS_SUCCESS';
+export const DELETE_PRODUCT = '[Products] DELETE_PRODUCT';
+export const DELETE_PRODUCT_SUCCESS = '[Products] DELETE_PRODUCT_SUCCESS';
+export const CREATE_PRODUCT = '[Products] CREATE_PRODUCT';
+export const CREATE_PRODUCT_SUCCESS = '[Products] CREATE_PRODUCT_SUCCESS';
+export const EDIT_PRODUCT = '[Products] EDIT_PRODUCT';
+export const EDIT_PRODUCT_SUCCESS = '[Products] EDIT_PRODUCT_SUCCESS';
+export const UPLOAD_IMAGE_FILES = '[Products] UPLOAD_IMAGE_FILES';
 
 export class LoadProductsAction {
   readonly type = LOAD_PRODUCTS;

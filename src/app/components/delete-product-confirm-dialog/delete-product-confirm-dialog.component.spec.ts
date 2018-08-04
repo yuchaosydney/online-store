@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { StoreModule } from '@ngrx/store';
 
-import { productReducer } from '../../reducers/products.reducer';
+import { productReducer } from '../../store/reducers/products.reducer';
 
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { DeleteProductConfirmDialogComponent } from './delete-product-confirm-dialog.component';

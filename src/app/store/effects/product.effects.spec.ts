@@ -7,7 +7,7 @@ import {Observable} from 'rxjs/Observable';
 import {toArray} from 'rxjs/operator/toArray';
 import {toPromise} from 'rxjs/operator/toPromise';
 
-import { Product } from '../models/product';
+import { Product } from '../../models/product';
 
 describe('product effects', () => {
 

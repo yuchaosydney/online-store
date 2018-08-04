@@ -10,7 +10,9 @@ import { DeleteProductConfirmDialogComponent } from '../delete-product-confirm-d
 import { Store } from '@ngrx/store';
 import { AppState} from '../../models/app-state';
 import { Observable } from 'rxjs/Observable';
-import * as productActions from '../../actions/products.actions';
+import * as productActions from '../../store/actions/products.actions';
+
+import * as fromStore from '../../store';
 
 @Component({
   selector: 'app-dashboard',
@@ -19,23 +21,22 @@ import * as productActions from '../../actions/products.actions';
 })
 export class DashboardComponent implements OnInit {
 
-  products$: Observable<any>;
+  products$: Observable<Product[]>;
   products: Product[];
   modalRef: BsModalRef;
 
   constructor(
-    private productStore: Store<AppState>,
+    private store: Store<AppState>,
     private router: Router,
     private modalService: BsModalService
   ) {
-    this.products$ = this.productStore.select('products');
-    this.products$.subscribe(state => {
-      this.products = state;
-    });
+    // this.products$.subscribe(state => {
+    //   this.products = state;
+    // });
   }
 
   getAllProducts () {
-    this.productStore.dispatch(new productActions.LoadProductsAction());
+    this.store.dispatch(new productActions.LoadProductsAction());
   }
 
   logout(): void {
@@ -66,6 +67,7 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAllProducts();
+    this.products$ = this.store.select(fromStore.getAllProducts);
   }
 
 }

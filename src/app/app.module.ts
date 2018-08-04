@@ -20,8 +20,8 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { ProgressbarModule } from 'ngx-bootstrap/progressbar';
 
 import { StoreModule } from '@ngrx/store';
-import { productReducer } from './reducers/products.reducer';
-import { ProductEffects } from './effects/product.effects';
+import { reducer } from './store/reducers/products.reducer';
+import { ProductEffects } from './store/effects/product.effects';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
@@ -46,7 +46,7 @@ import { ProductFormComponent } from './components/product-form/product-form.com
     HttpModule,
     ModalModule.forRoot(),
     ProgressbarModule.forRoot(),
-    StoreModule.forRoot({products: productReducer}),
+    StoreModule.forRoot({products: reducer}),
     EffectsModule.forRoot([ProductEffects]),
     StoreDevtoolsModule.instrument()
   ],

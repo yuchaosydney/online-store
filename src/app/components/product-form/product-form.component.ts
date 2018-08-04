@@ -5,7 +5,7 @@ import { Product } from '../../models/product';
 
 import { Store } from '@ngrx/store';
 import { AppState} from '../../models/app-state';
-import * as productActions from '../../actions/products.actions';
+import * as productActions from '../../store/actions/products.actions';
 
 import { AuthService } from '../../services/auth/auth.service';
 

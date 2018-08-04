@@ -1,12 +1,10 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { Router } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 import { StoreModule } from '@ngrx/store';
-import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { BsModalService } from 'ngx-bootstrap/modal';
 
-import { productReducer } from '../../reducers/products.reducer';
+import { reducer } from '../../store/reducers/products.reducer';
 
 import { DashboardComponent } from './dashboard.component';
 
@@ -23,7 +21,7 @@ describe('DashboardComponent', () => {
       imports: [
         ReactiveFormsModule,
         ModalModule.forRoot(),
-        StoreModule.forRoot({products: productReducer}),
+        StoreModule.forRoot({products: reducer}),
         RouterTestingModule.withRoutes(routes)
       ],
       declarations: [ DashboardComponent, AuthComponent ],

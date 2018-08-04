@@ -4,7 +4,7 @@ import {Product} from '../../models/product';
 
 import { Store } from '@ngrx/store';
 import { AppState } from '../../models/app-state';
-import {DeleteProductAction} from '../../actions/products.actions';
+import {DeleteProductAction} from '../../store/actions/products.actions';
 
 @Component({
   selector: 'app-delete-product-confirm-dialog',

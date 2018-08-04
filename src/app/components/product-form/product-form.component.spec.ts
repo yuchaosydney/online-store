@@ -6,7 +6,7 @@ import { StoreModule } from '@ngrx/store';
 import { ProductFormComponent } from './product-form.component';
 import { FileDropZoneComponent } from '../file-drop-zone/file-drop-zone.component';
 
-import { productReducer } from '../../reducers/products.reducer';
+import { productReducer } from '../../store/reducers/products.reducer';
 
 import { ModalModule } from 'ngx-bootstrap/modal';
 
