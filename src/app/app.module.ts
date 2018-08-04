@@ -17,6 +17,7 @@ import { HttpCallsService } from './services/http-calls/http-calls.service';
 
 // bootstrap stuff
 import { ModalModule } from 'ngx-bootstrap/modal';
+import { ProgressbarModule } from 'ngx-bootstrap/progressbar';
 
 import { StoreModule } from '@ngrx/store';
 import { productReducer } from './reducers/products.reducer';
@@ -44,6 +45,7 @@ import { ProductFormComponent } from './components/product-form/product-form.com
     ReactiveFormsModule,
     HttpModule,
     ModalModule.forRoot(),
+    ProgressbarModule.forRoot(),
     StoreModule.forRoot({products: productReducer}),
     EffectsModule.forRoot([ProductEffects]),
     StoreDevtoolsModule.instrument()
