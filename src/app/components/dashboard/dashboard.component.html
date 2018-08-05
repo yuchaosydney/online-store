@@ -22,7 +22,7 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr *ngIf="!products">
+				<tr *ngIf="!((products$ | async)?.length)">
 					<td colspan=1>
 						&nbsp;&nbsp;
 					</td>
@@ -30,7 +30,7 @@
 						<div class="loader"></div>
 					</td>
 				</tr>
-				<tr *ngFor="let product of products">
+				<tr *ngFor="let product of (products$ | async)">
 					<td>
 						<img class="product-img" src="https://res.cloudinary.com/demo/image/upload/sample.jpg"/>
 					</td>

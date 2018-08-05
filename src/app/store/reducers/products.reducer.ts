@@ -30,8 +30,6 @@ export function reducer(state = initialState, action: productActions.Action) {
         }
       );
 
-      console.log('--------------', entities);
-
       return {
         ...state,
         loading: false,
@@ -74,3 +72,5 @@ export function reducer(state = initialState, action: productActions.Action) {
 }
 
 export const getProductsEntities = (state: ProductsState) => state.entities;
+export const getProductsLoading = (state: ProductsState) => state.loading;
+export const getProductsLoaded = (state: ProductsState) => state.loaded;

@@ -66,8 +66,9 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getAllProducts();
+    // this.getAllProducts();
     this.products$ = this.store.select(fromStore.getAllProducts);
+    console.log('-------products------', this.products$);
   }
 
 }
