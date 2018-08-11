@@ -24,11 +24,9 @@ export class ProductsGuard implements CanActivate {
   }
 
   checkStore(): Observable<boolean> {
-    console.log('-----------loaded', this.store.select(fromStore.getAllProductsLoaded));
 
     return this.store.select(fromStore.getAllProductsLoaded).pipe(
       tap(loaded => {
-        console.log('-----------loaded', loaded);
         if (!loaded) {
           this.store.dispatch(new fromStore.LoadProductsAction());
         }

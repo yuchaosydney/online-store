@@ -31,7 +31,6 @@ import { reducers } from './store';
 
 // guards
 import * as fromGuards from './guards';
-import { AuthGuard } from './services/auth/auth.guard';
 
 // this would be done dynamically with webpack for builds
 const environment = {
@@ -47,7 +46,7 @@ export const ROUTES: Routes = [
   {
     'path': 'dashboard',
     component: DashboardComponent,
-    canActivate: [AuthGuard, fromGuards.ProductsGuard]},
+    canActivate: [fromGuards.AuthGuard, fromGuards.ProductsGuard]},
   {
     'path': 'login',
     component: AuthComponent
@@ -80,7 +79,6 @@ export const ROUTES: Routes = [
   ],
   providers: [
     AuthService,
-    AuthGuard,
     ProductsService,
     FileService,
     HttpCallsService,

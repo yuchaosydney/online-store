@@ -28,7 +28,6 @@ export class AuthComponent implements OnInit {
       result => {
         if (result.success) {
           this.authService.setToken(result.token);
-          console.log('-----------result---------', result);
           this.router.navigate(['/dashboard']);
         } else {
           this.error = result.message;

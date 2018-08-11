@@ -23,8 +23,6 @@ export class FileService {
 
   uploadFiles(files: File[]): Observable<any> {
 
-    console.log('------files--------', files);
-
     const fileUploadObservablesArray: Observable<any>[] = (
       files.map((file: File) => {
         const bucket = new S3({
@@ -48,11 +46,11 @@ export class FileService {
             }
             observer.next(data.Location);
             observer.complete();
-          }).on('httpUploadProgress', progress => {
-            const progressPercentage: number = progress.loaded * 100 / progress.total;
-            observer.next(progressPercentage);
-            console.log('-------progress----------', progressPercentage);
           });
+          // .on('httpUploadProgress', progress => {
+          //   const progressPercentage: number = progress.loaded * 100 / progress.total;
+          //   observer.next(progressPercentage);
+          // });
         });
       })
     );
