@@ -7,7 +7,7 @@ import { Store } from '@ngrx/store';
 import { AppState} from '../../models/app-state';
 import * as productActions from '../../store/actions/products.actions';
 
-import { AuthService } from '../../services/auth/auth.service';
+import * as fromService from '../../services';
 
 @Component({
   selector: 'app-product-form',
@@ -19,12 +19,12 @@ export class ProductFormComponent implements OnInit {
   productForm: FormGroup;
   isEditing: boolean;
   editingProduct: Product;
+  private files: File[] | string[];
 
   constructor(
     private appStore: Store<AppState>,
     public bsModalRef: BsModalRef,
     private fb: FormBuilder,
-    private authService: AuthService
   ) {
     this.productForm = fb.group({
       'productName': ['', Validators.required],
@@ -32,7 +32,6 @@ export class ProductFormComponent implements OnInit {
       'productDesc': ['', Validators.required]
     });
     this.isEditing = false;
-
   }
 
   ngOnInit() {
@@ -44,6 +43,8 @@ export class ProductFormComponent implements OnInit {
     }
     if (!this.editingProduct)
       this.editingProduct = new Product('', '', 0,  []);
+
+    this.files = this.editingProduct.images;
   }
 
   saveProduct() {
@@ -55,7 +56,4 @@ export class ProductFormComponent implements OnInit {
     }
   }
 
-  uploadAll(event) {
-    this.appStore.dispatch(new productActions.UploadImagesAction(event, this.editingProduct,  this.bsModalRef));
-  }
 }

@@ -30,13 +30,6 @@ export class DashboardComponent implements OnInit {
     private router: Router,
     private modalService: BsModalService
   ) {
-    // this.products$.subscribe(state => {
-    //   this.products = state;
-    // });
-  }
-
-  getAllProducts () {
-    this.store.dispatch(new productActions.LoadProductsAction());
   }
 
   logout(): void {
@@ -66,9 +59,7 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // this.getAllProducts();
     this.products$ = this.store.select(fromStore.getAllProducts);
-    console.log('-------products------', this.products$);
   }
 
 }

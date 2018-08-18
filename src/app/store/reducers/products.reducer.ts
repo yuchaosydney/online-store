@@ -18,7 +18,7 @@ export function reducer(state = initialState, action: productActions.Action) {
     case productActions.LOAD_PRODUCTS_SUCCESS: {
       const products = action.payload;
 
-      const entities = products.reduce(
+      const entities = products.length ? products.reduce(
         (entities: { [id: number]: Product}, product: Product) => {
           return {
             ...entities,
@@ -28,7 +28,7 @@ export function reducer(state = initialState, action: productActions.Action) {
         {
           ...state.entities
         }
-      );
+      ) : {};
 
       return {
         ...state,
