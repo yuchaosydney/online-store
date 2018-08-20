@@ -3,7 +3,9 @@ import { HttpCallsService } from '../http-calls/http-calls.service';
 import { Observable } from 'rxjs/Observable';
 
 import * as S3 from 'aws-sdk/clients/s3';
-import { concat } from '../../../../node_modules/rxjs/observable/concat';
+import { concat } from 'rxjs/observable/concat';
+
+import * as fromModel from '../../models/index';
 
 @Injectable()
 export class FileService {
@@ -18,10 +20,10 @@ export class FileService {
     return this.httpCallsService.postRequest(`file/upload`, file);
   }
 
-  uploadFiles(files: File[]): Observable<any> {
-console.log('------files-----', files);
+  uploadFiles(files: fromModel.UploadFile[]): Observable<any> {
+
     const fileUploadObservablesArray: Observable<any>[] = (
-      files.map((file: File) => {
+      files.map((file: fromModel.UploadFile) => {
 
         const bucket = new S3({
           accessKeyId: 'AKIAJ2IEVBO2AJCEI3LQ',
@@ -42,12 +44,14 @@ console.log('------files-----', files);
               console.error(`There was an error uploading your file: ${err}`);
               observer.error(`There was an error uploading your file: ${err}`);
             }
+
             observer.next(data.Location);
             observer.complete();
           })
           .on('httpUploadProgress', progress => {
             const progressPercentage: number = progress.loaded * 100 / progress.total;
-            observer.next(progressPercentage);
+            file.uploadProgress = progressPercentage;
+            observer.next(file);
           });
         });
       })

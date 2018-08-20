@@ -21,7 +21,7 @@
         <p class="file-drop-zone__file-img" *ngIf="file.name">{{file.name}}</p>
       </div>
       <div class="col-7">
-        <progressbar [value]="22" *ngIf="file.name" type="warning" [striped]="true">22%</progressbar>
+        <progressbar [value]="file.uploadProgress" *ngIf="file.name" type="info" [striped]="true">{{file.uploadProgress}}%</progressbar>
         <p *ngIf="!file.name" class="text-success">uploaded &#10004;</p>
       </div>
       <div class="col-2">

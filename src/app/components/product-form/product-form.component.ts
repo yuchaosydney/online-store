@@ -7,8 +7,6 @@ import { Store } from '@ngrx/store';
 import { AppState} from '../../models/app-state';
 import * as productActions from '../../store/actions/products.actions';
 
-import * as fromService from '../../services';
-
 @Component({
   selector: 'app-product-form',
   templateUrl: './product-form.component.html',
@@ -19,14 +17,14 @@ export class ProductFormComponent implements OnInit {
   productForm: FormGroup;
   isEditing: boolean;
   editingProduct: Product;
-  private files: File[] | string[];
+  files: string[];
 
   constructor(
     private appStore: Store<AppState>,
     public bsModalRef: BsModalRef,
     private fb: FormBuilder,
   ) {
-    this.productForm = fb.group({
+    this.productForm = this.fb.group({
       'productName': ['', Validators.required],
       'productPrice': ['', Validators.required],
       'productDesc': ['', Validators.required]
