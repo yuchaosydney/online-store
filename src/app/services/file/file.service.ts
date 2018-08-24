@@ -26,9 +26,7 @@ export class FileService {
       files.map((file: fromModel.UploadFile) => {
 
         const bucket = new S3({
-          accessKeyId: 'AKIAJ2IEVBO2AJCEI3LQ',
-          secretAccessKey: '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',
-          region: 'ap-southeast-2'
+
         });
 
         const params = {
@@ -49,7 +47,8 @@ export class FileService {
             observer.complete();
           })
           .on('httpUploadProgress', progress => {
-            const progressPercentage: number = progress.loaded * 100 / progress.total;
+            console.log('--------------------', progress);
+            const progressPercentage: number = progress.total ? progress.loaded * 100 / progress.total : 0;
             file.uploadProgress = progressPercentage;
             observer.next(file);
           });
