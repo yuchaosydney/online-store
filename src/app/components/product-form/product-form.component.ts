@@ -54,4 +54,8 @@ export class ProductFormComponent implements OnInit {
     }
   }
 
+  getFinalFileList($event) {
+    console.log('------event get in parent component---------', $event);
+  }
+
 }

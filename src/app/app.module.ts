@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, ErrorHandler } from '@angular/core';
-import { HttpModule, RequestOptions, Http } from '@angular/http';
+import { NgModule, ErrorHandler, APP_INITIALIZER } from '@angular/core';
+import { HttpModule, RequestOptions } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 
@@ -12,6 +13,7 @@ import { AuthService } from './services/auth/auth.service';
 import { ProductsService } from './services/product/products.service';
 import { FileService } from './services/file/file.service';
 import { HttpCallsService } from './services/http-calls/http-calls.service';
+import { AppConfigService } from './services';
 
 // bootstrap stuff
 import { ModalModule } from 'ngx-bootstrap/modal';
@@ -44,15 +46,21 @@ export const metaReducers: MetaReducer<any>[] = !environment.production
 
 export const ROUTES: Routes = [
   {
-    'path': 'dashboard',
-    component: DashboardComponent,
-    canActivate: [fromGuards.AuthGuard, fromGuards.ProductsGuard]},
-  {
     'path': 'login',
     component: AuthComponent
+  },
+  {
+    'path': 'dashboard',
+    component: DashboardComponent,
+    canActivate: [fromGuards.AuthGuard, fromGuards.ProductsGuard]
   }
 ];
 
+const appInitializerFn = (appConfig: AppConfigService) => {
+  return () => {
+      return appConfig.loadAppConfig();
+  };
+};
 
 @NgModule({
   declarations: [
@@ -68,6 +76,7 @@ export const ROUTES: Routes = [
     BrowserModule,
     ReactiveFormsModule,
     HttpModule,
+    HttpClientModule,
     RouterModule.forRoot(ROUTES),
     ModalModule.forRoot(),
     ProgressbarModule.forRoot(),
@@ -82,6 +91,13 @@ export const ROUTES: Routes = [
     ProductsService,
     FileService,
     HttpCallsService,
+    AppConfigService,
+    {
+      provide: APP_INITIALIZER,
+      useFactory: appInitializerFn,
+      multi: true,
+      deps: [AppConfigService]
+    },
     {
       provide: RequestOptions,
       useClass: AuthRequestOptions

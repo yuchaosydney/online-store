@@ -14,17 +14,12 @@ export class FileDropZoneComponent implements OnInit {
   fileList: Array<fromModel.UploadFile> = [];
 
   @Input()
-  existingFiles: string[] = [];
+  existingFiles: String[] = [];
 
   @Output()
-  finalFileList: string[] = [];
+  newUploadedFile: EventEmitter<String> = new EventEmitter<String>();
 
-  constructor(
-    private fileService: fromService.FileService
-  ) {
-    // this.finalFileList = this.existingFiles;
-    console.log('---------in constructor--------', this.fileList);
-  }
+  constructor(private fileService: fromService.FileService) {}
 
   ngOnInit() {}
 
@@ -48,6 +43,11 @@ export class FileDropZoneComponent implements OnInit {
     this.fileService.uploadFiles(uploadingFiles).subscribe(val => {
       console.log('------subscribe--------', val);
       console.log('------file list--------', this.fileList);
+      if (val instanceof String) {
+        // get file name
+        this.newUploadedFile.emit(val);
+      }
+
     });
   }
 }

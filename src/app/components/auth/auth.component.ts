@@ -2,8 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { User } from '../../models/user';
 import { AuthService } from '../../services/auth/auth.service';
-import { useAnimation } from '@angular/core/src/animation/dsl';
-import { cleanSession } from 'selenium-webdriver/safari';
 import { Router } from '@angular/router';
 
 @Component({

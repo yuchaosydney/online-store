@@ -1,18 +1,22 @@
 import { Injectable } from '@angular/core';
-import { HttpCallsService } from '../http-calls/http-calls.service';
 import { Observable } from 'rxjs/Observable';
 
 import * as S3 from 'aws-sdk/clients/s3';
 import { concat } from 'rxjs/observable/concat';
 
 import * as fromModel from '../../models/index';
+import { HttpCallsService } from '../http-calls/http-calls.service';
+import { AppConfigService } from '../app-config/app-config-service.service';
 
 @Injectable()
 export class FileService {
 
   private bucketName;
 
-  constructor(private httpCallsService: HttpCallsService) {
+  constructor(
+    private httpCallsService: HttpCallsService,
+    private appConfig: AppConfigService
+  ) {
     this.bucketName = 'phonecase-store-app-assets';
   }
 
@@ -26,7 +30,9 @@ export class FileService {
       files.map((file: fromModel.UploadFile) => {
 
         const bucket = new S3({
-
+          accessKeyId: this.appConfig.config.S3.accessKeyId,
+          secretAccessKey: this.appConfig.config.S3.secretAccessKey,
+          region: this.appConfig.config.S3.region
         });
 
         const params = {
@@ -47,7 +53,6 @@ export class FileService {
             observer.complete();
           })
           .on('httpUploadProgress', progress => {
-            console.log('--------------------', progress);
             const progressPercentage: number = progress.total ? progress.loaded * 100 / progress.total : 0;
             file.uploadProgress = progressPercentage;
             observer.next(file);
