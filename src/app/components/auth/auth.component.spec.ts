@@ -3,7 +3,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import {RouterTestingModule} from '@angular/router/testing';
 
-import { AppRoutingModule } from '../../app-routing.module';
 import { AuthComponent } from './auth.component';
 import { AuthService } from '../../services/auth/auth.service';
 import { HttpCallsService } from '../../services/http-calls/http-calls.service';

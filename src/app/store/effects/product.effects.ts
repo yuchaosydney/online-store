@@ -33,7 +33,7 @@ export class ProductEffects {
     .switchMap((action: productActions.EditProductAction) => {
       return this.productService.editProduct(action.payload)
       .map(res => {
-        return new productActions.EditProductSuccessAction(res, action.bsModalRef);
+        return new productActions.EditProductSuccessAction(res.product, action.bsModalRef);
       });
     });
 }

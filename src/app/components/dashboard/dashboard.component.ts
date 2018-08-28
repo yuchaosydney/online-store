@@ -10,7 +10,6 @@ import { DeleteProductConfirmDialogComponent } from '../delete-product-confirm-d
 import { Store } from '@ngrx/store';
 import { AppState} from '../../models/app-state';
 import { Observable } from 'rxjs/Observable';
-import * as productActions from '../../store/actions/products.actions';
 
 import * as fromStore from '../../store';
 

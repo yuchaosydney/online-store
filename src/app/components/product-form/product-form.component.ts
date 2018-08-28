@@ -25,9 +25,9 @@ export class ProductFormComponent implements OnInit {
     private fb: FormBuilder,
   ) {
     this.productForm = this.fb.group({
-      'productName': ['', Validators.required],
-      'productPrice': ['', Validators.required],
-      'productDesc': ['', Validators.required]
+      'name': ['', Validators.required],
+      'price': ['', Validators.required],
+      'description': ['', Validators.required]
     });
     this.isEditing = false;
   }
@@ -35,9 +35,9 @@ export class ProductFormComponent implements OnInit {
   ngOnInit() {
     if (this.productForm && this.isEditing ) {
       this.productForm.setValue({
-        'productName': this.editingProduct.name,
-        'productPrice': this.editingProduct.price,
-        'productDesc': this.editingProduct.description});
+        'name': this.editingProduct.name,
+        'price': this.editingProduct.price,
+        'description': this.editingProduct.description});
     }
     if (!this.editingProduct)
       this.editingProduct = new Product('', '', 0,  []);
@@ -46,6 +46,12 @@ export class ProductFormComponent implements OnInit {
   }
 
   saveProduct() {
+    this.editingProduct = {
+      ...this.editingProduct,
+      name: this.productForm.value.name,
+      price: this.productForm.value.price,
+      description: this.productForm.value.description
+    };
     if (this.isEditing) {
       this.appStore.dispatch(new productActions.EditProductAction(this.editingProduct, this.bsModalRef));
     } else {
