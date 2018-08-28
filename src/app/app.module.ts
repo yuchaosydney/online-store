@@ -7,7 +7,6 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { AuthComponent } from './components/auth/auth.component';
-import { AuthRequestOptions } from './services/auth/auth-request';
 import { AuthErrorHandler } from './services/auth/auth-error-handler';
 import { AuthService } from './services/auth/auth.service';
 import { ProductsService } from './services/product/products.service';
@@ -97,10 +96,6 @@ const appInitializerFn = (appConfig: AppConfigService) => {
       useFactory: appInitializerFn,
       multi: true,
       deps: [AppConfigService]
-    },
-    {
-      provide: RequestOptions,
-      useClass: AuthRequestOptions
     },
     {
       provide: ErrorHandler,

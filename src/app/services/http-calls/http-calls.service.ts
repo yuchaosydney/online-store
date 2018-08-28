@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
-import { AuthRequestOptions } from '../auth/auth-request';
 
+export const TOKEN_NAME = 'jwt_token';
+export const AUTH_HEADER_KEY = 'x-access-token';
 @Injectable()
 export class HttpCallsService {
 
@@ -10,8 +11,16 @@ export class HttpCallsService {
   private headers = new Headers({ 'Content-Type': 'application/json' });
 
   constructor(private http: Http, private requestOptions: RequestOptions) {
-     this.headers = this.requestOptions.headers;
-     this.headers.append('Content-Type', 'application/json');
+    this.headers = this.requestOptions.headers;
+    this.headers.append('Content-Type', 'application/json');
+    const token = localStorage.getItem(TOKEN_NAME);
+    if (token) {
+      this.updateHeader(AUTH_HEADER_KEY, token);
+    }
+  }
+
+  updateHeader (key: string, value: string): void {
+    this.headers.append(key, value);
   }
 
   postRequest(path, obj): Observable<any> {

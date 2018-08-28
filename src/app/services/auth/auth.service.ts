@@ -1,13 +1,11 @@
 import { Injectable } from '@angular/core';
-import { Http, Response, Headers } from '@angular/http';
 import * as jwt_decode from 'jwt-decode';
 import { User } from '../../models/user';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 import { HttpCallsService } from '../http-calls/http-calls.service';
-
-export const TOKEN_NAME = 'jwt_token';
+import { TOKEN_NAME, AUTH_HEADER_KEY} from '../http-calls/http-calls.service';
 
 @Injectable()
 export class AuthService {
@@ -20,6 +18,7 @@ export class AuthService {
 
   setToken(token: string): void {
     localStorage.setItem(TOKEN_NAME, token);
+    this.httpCallsService.updateHeader(AUTH_HEADER_KEY, token);
   }
 
   getTokenExpirationDate(token: string): Date {

@@ -11,6 +11,7 @@ import * as fromStore from '../store';
 
 @Injectable()
 export class ProductsGuard implements CanActivate {
+
   constructor(private store: Store<fromStore.ProductsFeatureState>) {}
 
   canActivate(): Observable<boolean> {
