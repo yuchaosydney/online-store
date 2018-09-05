@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, ErrorHandler, APP_INITIALIZER } from '@angular/core';
-import { HttpModule, RequestOptions } from '@angular/http';
+import { HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
@@ -18,10 +18,8 @@ import { AppConfigService } from './services';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { ProgressbarModule } from 'ngx-bootstrap/progressbar';
 
-import { StoreModule, MetaReducer } from '@ngrx/store';
+import { MetaReducer } from '@ngrx/store';
 import { storeFreeze } from 'ngrx-store-freeze';
-import { ProductEffects } from './store/effects/product.effects';
-import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { FileDropZoneComponent } from './components/file-drop-zone/file-drop-zone.component';
@@ -34,6 +32,7 @@ import { reducers } from './store';
 
 // guards
 import * as fromGuards from './guards';
+
 
 // this would be done dynamically with webpack for builds
 const environment = {
@@ -52,8 +51,7 @@ export const ROUTES: Routes = [
   },
   {
     'path': 'dashboard',
-    component: DashboardComponent,
-    canActivate: [fromGuards.AuthGuard, fromGuards.ProductsGuard]
+    loadChildren: '../dashboard/dashboard.module#DashboardModule'
   }
 ];
 
@@ -70,8 +68,9 @@ const appInitializerFn = (appConfig: AppConfigService) => {
     ProductFormComponent,
     DeleteProductConfirmDialogComponent,
     FileDropZoneComponent
+
   ],
-  entryComponents: [ProductFormComponent, DeleteProductConfirmDialogComponent],
+  entryComponents: [],
   imports: [
     BrowserModule,
     ReactiveFormsModule,
@@ -86,6 +85,7 @@ const appInitializerFn = (appConfig: AppConfigService) => {
     EffectsModule.forRoot([]),
     StoreDevtoolsModule.instrument(),
     DashboardModule,
+
   ],
   providers: [
     AuthService,
@@ -102,8 +102,7 @@ const appInitializerFn = (appConfig: AppConfigService) => {
     {
       provide: ErrorHandler,
       useClass: AuthErrorHandler
-    },
-    fromGuards.guards
+    }
   ],
   bootstrap: [AppComponent]
 })
