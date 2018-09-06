@@ -38,11 +38,12 @@ export const ROUTES: Routes = [
     StoreModule.forFeature('products', reducers),
     EffectsModule.forFeature(effects),
   ],
-  declarations: [fromComponents.components],
+  declarations: [...fromComponents.components],
   providers: [
     ...fromGuards.guards,
     ...fromPublicGuards.guards,
     ...fromServices.services
-  ]
+  ],
+  entryComponents: [fromComponents.ProductFormComponent]
 })
 export class DashboardModule { }
