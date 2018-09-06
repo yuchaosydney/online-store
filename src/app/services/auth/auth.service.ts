@@ -4,21 +4,20 @@ import { User } from '../../models/user';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
-import { HttpCallsService } from '../http-calls/http-calls.service';
-import { TOKEN_NAME, AUTH_HEADER_KEY} from '../http-calls/http-calls.service';
+import * as fromPublicService from '../../../services';
 
 @Injectable()
 export class AuthService {
 
-  constructor(private httpCallsService: HttpCallsService) {}
+  constructor(private httpCallsService: fromPublicService.HttpCallsService) {}
 
   getToken(): string {
-    return localStorage.getItem(TOKEN_NAME);
+    return localStorage.getItem(fromPublicService.TOKEN_NAME);
   }
 
   setToken(token: string): void {
-    localStorage.setItem(TOKEN_NAME, token);
-    this.httpCallsService.updateHeader(AUTH_HEADER_KEY, token);
+    localStorage.setItem(fromPublicService.TOKEN_NAME, token);
+    this.httpCallsService.updateHeader(fromPublicService.AUTH_HEADER_KEY, token);
   }
 
   getTokenExpirationDate(token: string): Date {

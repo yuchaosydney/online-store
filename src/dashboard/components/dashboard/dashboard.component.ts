@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Product } from '../../models/product';
-import { TOKEN_NAME } from '../../services/index';
 import { Router } from '@angular/router';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { ProductFormComponent } from '../product-form/product-form.component';
+
+import * as fromPublicService from '../../../services';
+
 /* tslint:disable:max-line-length */
 import { DeleteProductConfirmDialogComponent } from '../delete-product-confirm-dialog/delete-product-confirm-dialog.component';
 import { Store } from '@ngrx/store';
@@ -32,7 +34,7 @@ export class DashboardComponent implements OnInit {
   }
 
   logout(): void {
-    localStorage.removeItem(TOKEN_NAME);
+    localStorage.removeItem(fromPublicService.TOKEN_NAME);
     this.router.navigate(['/login']);
   }
 

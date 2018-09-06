@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 
+import * as fromPublicService from '../../../services';
+
 import * as S3 from 'aws-sdk/clients/s3';
 import { concat } from 'rxjs/observable/concat';
 
 import * as fromModel from '../../models/index';
-import { HttpCallsService } from '../http-calls/http-calls.service';
-import { AppConfigService } from '../app-config/app-config-service.service';
 
 @Injectable()
 export class FileService {
@@ -14,8 +14,8 @@ export class FileService {
   private bucketName;
 
   constructor(
-    private httpCallsService: HttpCallsService,
-    private appConfig: AppConfigService
+    private httpCallsService: fromPublicService.HttpCallsService,
+    private appConfig: fromPublicService.AppConfigService
   ) {
     this.bucketName = 'phonecase-store-app-assets';
   }

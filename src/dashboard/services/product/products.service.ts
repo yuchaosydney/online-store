@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Product } from '../../models/product';
 import { Observable } from 'rxjs/Observable';
-import { HttpCallsService } from '../http-calls/http-calls.service';
+import * as fromPublicService from '../../../services';
 
 @Injectable()
 export class ProductsService {
 
-  constructor(private httpCallsService: HttpCallsService) { }
+  constructor(private httpCallsService: fromPublicService.HttpCallsService) { }
 
   getAllProducts(): Observable<any> {
     return this.httpCallsService.getRequest('product/all');

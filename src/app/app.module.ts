@@ -9,16 +9,11 @@ import { AppComponent } from './app.component';
 import { AuthComponent } from './components/auth/auth.component';
 import { AuthErrorHandler } from './services/auth/auth-error-handler';
 import { AuthService } from './services/auth/auth.service';
-import { ProductsService } from './services/product/products.service';
-import { FileService } from './services/file/file.service';
-import { HttpCallsService } from './services/http-calls/http-calls.service';
-import { AppConfigService } from './services';
+import * as fromPublicService from '../services';
 
-// bootstrap stuff
-import { ModalModule } from 'ngx-bootstrap/modal';
-import { ProgressbarModule } from 'ngx-bootstrap/progressbar';
+import { StoreModule, MetaReducer } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
 
-import { MetaReducer } from '@ngrx/store';
 import { storeFreeze } from 'ngrx-store-freeze';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
@@ -43,7 +38,7 @@ export const ROUTES: Routes = [
   }
 ];
 
-const appInitializerFn = (appConfig: AppConfigService) => {
+const appInitializerFn = (appConfig: fromPublicService.AppConfigService) => {
   return () => {
       return appConfig.loadAppConfig();
   };
@@ -60,22 +55,20 @@ const appInitializerFn = (appConfig: AppConfigService) => {
     ReactiveFormsModule,
     HttpModule,
     HttpClientModule,
+    StoreModule.forRoot({}),
+    EffectsModule.forRoot([]),
     RouterModule.forRoot(ROUTES),
-    ModalModule.forRoot(),
-    ProgressbarModule.forRoot(),
     StoreDevtoolsModule.instrument()
   ],
   providers: [
     AuthService,
-    ProductsService,
-    FileService,
-    HttpCallsService,
-    AppConfigService,
+    fromPublicService.HttpCallsService,
+    fromPublicService.AppConfigService,
     {
       provide: APP_INITIALIZER,
       useFactory: appInitializerFn,
       multi: true,
-      deps: [AppConfigService]
+      deps: [fromPublicService.AppConfigService]
     },
     {
       provide: ErrorHandler,
