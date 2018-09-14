@@ -17,7 +17,7 @@ export class FileDropZoneComponent implements OnInit {
   existingFiles: String[] = [];
 
   @Output()
-  newUploadedFile: EventEmitter<String> = new EventEmitter<String>();
+  newUploadedFile: EventEmitter<string> = new EventEmitter<string>();
 
   constructor(private fileService: fromService.FileService) {}
 
@@ -41,13 +41,10 @@ export class FileDropZoneComponent implements OnInit {
     const uploadingFiles = Object.assign([], this.fileList.filter(file => file instanceof File));
 
     this.fileService.uploadFiles(uploadingFiles).subscribe(val => {
-      console.log('------subscribe--------', val);
-      console.log('------file list--------', this.fileList);
-      if (val instanceof String) {
+      if (typeof val === 'string') {
         // get file name
         this.newUploadedFile.emit(val);
       }
-
     });
   }
 }

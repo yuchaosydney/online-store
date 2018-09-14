@@ -37,7 +37,8 @@ export class ProductFormComponent implements OnInit {
       this.productForm.setValue({
         'name': this.editingProduct.name,
         'price': this.editingProduct.price,
-        'description': this.editingProduct.description});
+        'description': this.editingProduct.description
+      });
     }
     if (!this.editingProduct)
       this.editingProduct = new Product('', '', 0,  []);
@@ -53,15 +54,19 @@ export class ProductFormComponent implements OnInit {
       description: this.productForm.value.description
     };
     if (this.isEditing) {
-      this.appStore.dispatch(new productActions.EditProductAction(this.editingProduct, this.bsModalRef));
+      this.appStore.dispatch(new productActions.EditProductAction(this.editingProduct));
     } else {
       const product = new Product(this.editingProduct.name, this.editingProduct.description, this.editingProduct.price,  []);
       this.appStore.dispatch(new productActions.CreateProductAction(product, this.bsModalRef));
     }
   }
 
-  getFinalFileList($event) {
-    console.log('------event get in parent component---------', $event);
+  newUploadedFile($event: string) {
+    this.editingProduct = {
+      ...this.editingProduct,
+      images: [...this.editingProduct.images, $event]
+    };
+    this.appStore.dispatch(new productActions.EditProductAction(this.editingProduct));
   }
 
 }

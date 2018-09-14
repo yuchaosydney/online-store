@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 
-import * as S3 from 'aws-sdk/clients/s3';
+import * as AWS from 'aws-sdk';
 import { concat } from 'rxjs/observable/concat';
 
 import * as fromModel from '../../models/index';
@@ -17,7 +17,6 @@ export class FileService {
     private httpCallsService: HttpCallsService,
     private appConfig: AppConfigService
   ) {
-    this.bucketName = 'phonecase-store-app-assets';
   }
 
   uploadFile(file: File): Observable<any> {
@@ -29,14 +28,16 @@ export class FileService {
     const fileUploadObservablesArray: Observable<any>[] = (
       files.map((file: fromModel.UploadFile) => {
 
-        const bucket = new S3({
-          accessKeyId: this.appConfig.config.S3.accessKeyId,
-          secretAccessKey: this.appConfig.config.S3.secretAccessKey,
-          region: this.appConfig.config.S3.region
+        const bucket = new AWS.S3({
+          region: this.appConfig.config.S3.region,
+          credentials: {
+            accessKeyId: this.appConfig.config.S3.accessKeyId,
+            secretAccessKey: this.appConfig.config.S3.secretAccessKey
+          }
         });
 
         const params = {
-          Bucket: this.bucketName,
+          Bucket: this.appConfig.config.S3.bucketName,
           Key: file.name,
           Body: file,
           ACL: 'public-read'

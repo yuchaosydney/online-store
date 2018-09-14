@@ -7,7 +7,16 @@
 <div class="modal-body">
   <form role="form" [formGroup]="productForm">
     <div class="form-group">
-      <app-file-drop-zone  [existingFiles]="files" (newUploadedFile)="getFinalFileList($event)" ></app-file-drop-zone>
+      <app-file-drop-zone  [existingFiles]="files" (newUploadedFile)="newUploadedFile($event)" ></app-file-drop-zone>
+    </div>
+    <div class="form-group">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm" *ngFor="let image of editingProduct.images">
+            <img class="productForm__product-image rounded" src="{{image}}" />
+          </div>
+        </div>
+      </div>
     </div>
     <div class="form-group">
       <label for="product-name">Product Name</label>

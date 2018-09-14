@@ -43,12 +43,12 @@ export class CreateProductSuccessAction {
 
 export class EditProductAction {
   readonly type = EDIT_PRODUCT;
-  constructor(public payload: Product, public bsModalRef: BsModalRef) {}
+  constructor(public payload: Product) {}
 }
 
 export class EditProductSuccessAction {
   readonly type = EDIT_PRODUCT_SUCCESS;
-  constructor(public payload: Product, public bsModalRef: BsModalRef) {}
+  constructor(public payload: Product) {}
 }
 
 export class UploadImagesAction {
