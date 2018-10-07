@@ -28,6 +28,8 @@ import { FileDropZoneComponent } from './components/file-drop-zone/file-drop-zon
 import { DeleteProductConfirmDialogComponent } from './components/delete-product-confirm-dialog/delete-product-confirm-dialog.component';
 import { ProductFormComponent } from './components/product-form/product-form.component';
 
+import { DashboardModule } from './components/dashboard/dashboard.module';
+
 import { reducers } from './store';
 
 // guards
@@ -67,7 +69,6 @@ const appInitializerFn = (appConfig: AppConfigService) => {
     AuthComponent,
     ProductFormComponent,
     DeleteProductConfirmDialogComponent,
-    DashboardComponent,
     FileDropZoneComponent
   ],
   entryComponents: [ProductFormComponent, DeleteProductConfirmDialogComponent],
@@ -83,7 +84,8 @@ const appInitializerFn = (appConfig: AppConfigService) => {
     StoreModule.forFeature('products', reducers),
     EffectsModule.forFeature([ProductEffects]),
     EffectsModule.forRoot([]),
-    StoreDevtoolsModule.instrument()
+    StoreDevtoolsModule.instrument(),
+    DashboardModule,
   ],
   providers: [
     AuthService,
