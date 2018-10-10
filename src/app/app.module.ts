@@ -59,7 +59,6 @@ const appInitializerFn = (appConfig: fromPublicService.AppConfigService) => {
     StoreModule.forRoot({}),
     EffectsModule.forRoot([]),
     RouterModule.forRoot(ROUTES),
-    EffectsModule.forRoot([]),
     StoreDevtoolsModule.instrument(),
   ],
   providers: [
