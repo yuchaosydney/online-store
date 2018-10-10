@@ -1,10 +1,13 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import { RouterModule } from '@angular/router';
+import { APP_BASE_HREF } from '@angular/common';
 
 import { AuthComponent } from './auth.component';
 import { AuthService } from '../../services/auth/auth.service';
 
+import * as fromPublicService from '../../../services';
 
 describe('AuthComponent', () => {
   let component: AuthComponent;
@@ -15,12 +18,15 @@ describe('AuthComponent', () => {
       imports: [
         ReactiveFormsModule,
         HttpModule,
+        RouterModule.forRoot([])
       ],
       declarations: [
         AuthComponent,
       ],
       providers: [
+        ...fromPublicService.services,
         AuthService,
+        {provide: APP_BASE_HREF, useValue : '/' }
       ]
     })
     .compileComponents();

@@ -4,11 +4,16 @@ import { AuthService } from './auth.service';
 
 import { HttpModule } from '@angular/http';
 
+import * as fromPublicService from '../../../services';
+
 describe('AuthService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpModule],
-      providers: [AuthService]
+      providers: [
+        ...fromPublicService.services,
+        AuthService
+      ]
     });
   });
 
