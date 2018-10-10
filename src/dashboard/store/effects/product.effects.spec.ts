@@ -39,7 +39,7 @@ describe('product effects', () => {
 
       const actions = new Actions(hot('-a-|', {a: new fromActions.LoadProductsAction()}));
       const service = stubService(mockProductList);
-      const effects = new ProductEffects(service , null , actions);
+      const effects = new ProductEffects(service, actions);
 
       expect(effects.loadProducts$).toBeObservable(cold('-a-|', {a: new fromActions.LoadProductsSuccessAction(mockProductList)}));
     });
@@ -48,7 +48,7 @@ describe('product effects', () => {
 
       const actions = new Actions(hot('-a-|', {a: new fromActions.LoadProductsAction()}));
       const service = stubService(mockProductList);
-      const effects = new ProductEffects(service , null , actions);
+      const effects = new ProductEffects(service , actions);
 
       expect(await readAll(effects.loadProducts$)).toEqual([
         new fromActions.LoadProductsSuccessAction(mockProductList)
@@ -62,7 +62,7 @@ describe('product effects', () => {
 
       const actions = new Actions(hot('-a-|', {a: new fromActions.DeleteProductAction(mockProduct, null)}));
       const service = stubService(mockProduct);
-      const effects = new ProductEffects(service , null , actions);
+      const effects = new ProductEffects(service, actions);
 
       expect(effects.deleteProduct$).toBeObservable(cold('-a-|', {a: new fromActions.DeleteProductSuccessAction(mockProduct, null)}));
     });
@@ -73,19 +73,9 @@ describe('product effects', () => {
 
       const actions = new Actions(hot('-a-|', {a: new fromActions.CreateProductAction(mockProduct, null)}));
       const service = stubService(mockProduct);
-      const effects = new ProductEffects(service , null , actions);
+      const effects = new ProductEffects(service, actions);
 
       expect(effects.createProduct$).toBeObservable(cold('-a-|', {a: new fromActions.CreateProductSuccessAction(mockProduct, null)}));
-    });
-  });
-
-  describe('uploadImages$', () => {
-    it('should dispatch EditProductAction action', () => {
-      const actions = new Actions(hot('-a-|', {a: new fromActions.UploadImagesAction([mockFile], mockProduct, null)}));
-      const fileService = stubFileService([{filename: mockFile.name}]);
-      const effects = new ProductEffects(null , fileService , actions);
-
-      expect(effects.uploadImages$).toBeObservable(cold('-a-|', {a: new fromActions.EditProductAction(mockProduct, null)}));
     });
   });
 

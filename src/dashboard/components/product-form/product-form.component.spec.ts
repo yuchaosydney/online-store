@@ -1,18 +1,19 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-import { StoreModule } from '@ngrx/store';
 
 import { ProductFormComponent } from './product-form.component';
 import { FileDropZoneComponent } from '../file-drop-zone/file-drop-zone.component';
 
-import { productReducer } from '../../store/reducers/products.reducer';
+import { reducers } from '../../store/reducers';
 
 import { ModalModule } from 'ngx-bootstrap/modal';
 
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
-import { AuthService } from '../../services/auth/auth.service';
-import { HttpCallsService } from '../../services/http-calls/http-calls.service';
+import { StoreModule } from '@ngrx/store';
+
+import * as fromServices from '../../services';
+import * as fromPublicService from '../../../services';
 
 describe('ProductFormComponent', () => {
   let component: ProductFormComponent;
@@ -22,12 +23,17 @@ describe('ProductFormComponent', () => {
     TestBed.configureTestingModule({
       imports: [
         ReactiveFormsModule,
-        StoreModule.forRoot({products: productReducer}),
         ModalModule,
-        HttpModule
+        HttpModule,
+        StoreModule.forRoot({}),
+        StoreModule.forFeature('products', reducers)
       ],
       declarations: [ ProductFormComponent, FileDropZoneComponent ],
-      providers: [ BsModalRef, AuthService, HttpCallsService ]
+      providers: [
+        BsModalRef,
+        ...fromServices.services,
+        ...fromPublicService.services
+      ]
     })
     .compileComponents();
   }));

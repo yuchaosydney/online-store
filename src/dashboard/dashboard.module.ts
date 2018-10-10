@@ -44,6 +44,9 @@ export const ROUTES: Routes = [
     ...fromPublicGuards.guards,
     ...fromServices.services
   ],
-  entryComponents: [fromComponents.ProductFormComponent]
+  entryComponents: [
+    fromComponents.ProductFormComponent,
+    fromComponents.DeleteProductConfirmDialogComponent,
+  ]
 })
 export class DashboardModule { }
