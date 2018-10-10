@@ -4,7 +4,7 @@ import { Observable } from 'rxjs/Observable';
 
 import * as fromPublicService from '../../../services';
 
-import * as S3 from 'aws-sdk/clients/s3';
+import * as AWS from 'aws-sdk';
 import { concat } from 'rxjs/observable/concat';
 
 import * as fromModel from '../../models/index';

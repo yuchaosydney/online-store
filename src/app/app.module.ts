@@ -16,17 +16,6 @@ import { EffectsModule } from '@ngrx/effects';
 
 import { storeFreeze } from 'ngrx-store-freeze';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { FileDropZoneComponent } from './components/file-drop-zone/file-drop-zone.component';
-import { DeleteProductConfirmDialogComponent } from './components/delete-product-confirm-dialog/delete-product-confirm-dialog.component';
-import { ProductFormComponent } from './components/product-form/product-form.component';
-
-import { DashboardModule } from './components/dashboard/dashboard.module';
-
-import { reducers } from './store';
-
-// guards
-import * as fromGuards from './guards';
 
 
 // this would be done dynamically with webpack for builds
@@ -60,10 +49,6 @@ const appInitializerFn = (appConfig: fromPublicService.AppConfigService) => {
   declarations: [
     AppComponent,
     AuthComponent,
-    ProductFormComponent,
-    DeleteProductConfirmDialogComponent,
-    FileDropZoneComponent
-
   ],
   entryComponents: [],
   imports: [
@@ -74,14 +59,8 @@ const appInitializerFn = (appConfig: fromPublicService.AppConfigService) => {
     StoreModule.forRoot({}),
     EffectsModule.forRoot([]),
     RouterModule.forRoot(ROUTES),
-    ModalModule.forRoot(),
-    ProgressbarModule.forRoot(),
-    StoreModule.forRoot(reducers, { metaReducers }),
-    StoreModule.forFeature('products', reducers),
-    EffectsModule.forFeature([ProductEffects]),
     EffectsModule.forRoot([]),
     StoreDevtoolsModule.instrument(),
-    DashboardModule,
   ],
   providers: [
     AuthService,
