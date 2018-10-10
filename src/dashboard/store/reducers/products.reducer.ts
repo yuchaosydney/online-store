@@ -56,7 +56,6 @@ export function reducer(state = initialState, action: productActions.Action) {
         [product._id]: product
       };
 
-      action.bsModalRef.hide();
       return {
         ...state,
         entities

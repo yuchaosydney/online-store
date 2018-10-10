@@ -2,14 +2,18 @@ import { TestBed, inject } from '@angular/core/testing';
 
 import { AuthService } from './auth.service';
 
-import { HttpCallsService } from '../http-calls/http-calls.service';
 import { HttpModule } from '@angular/http';
+
+import * as fromPublicService from '../../../services';
 
 describe('AuthService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpModule],
-      providers: [AuthService, HttpCallsService]
+      providers: [
+        ...fromPublicService.services,
+        AuthService
+      ]
     });
   });
 

@@ -1,6 +1,13 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { HttpModule } from '@angular/http';
+import { StoreModule } from '@ngrx/store';
 
 import { FileDropZoneComponent } from './file-drop-zone.component';
+
+import * as fromServices from '../../services';
+import * as fromPublicService from '../../../services';
+
+import { reducers } from '../../store/reducers';
 
 describe('FileDropZoneComponent', () => {
   let component: FileDropZoneComponent;
@@ -8,7 +15,16 @@ describe('FileDropZoneComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ FileDropZoneComponent ]
+      imports: [
+        HttpModule,
+        StoreModule.forRoot({}),
+        StoreModule.forFeature('products', reducers)
+      ],
+      declarations: [ FileDropZoneComponent ],
+      providers: [
+        ...fromServices.services,
+        ...fromPublicService.services
+      ]
     })
     .compileComponents();
   }));

@@ -1,14 +1,13 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-import {RouterTestingModule} from '@angular/router/testing';
+import { RouterModule } from '@angular/router';
+import { APP_BASE_HREF } from '@angular/common';
 
 import { AuthComponent } from './auth.component';
 import { AuthService } from '../../services/auth/auth.service';
-import { HttpCallsService } from '../../services/http-calls/http-calls.service';
 
-import { routes } from '../../app-routing.module';
-import { DashboardComponent } from '../dashboard/dashboard.component';
+import * as fromPublicService from '../../../services';
 
 describe('AuthComponent', () => {
   let component: AuthComponent;
@@ -19,15 +18,15 @@ describe('AuthComponent', () => {
       imports: [
         ReactiveFormsModule,
         HttpModule,
-        RouterTestingModule.withRoutes(routes)
+        RouterModule.forRoot([])
       ],
       declarations: [
         AuthComponent,
-        DashboardComponent
       ],
       providers: [
+        ...fromPublicService.services,
         AuthService,
-        HttpCallsService
+        {provide: APP_BASE_HREF, useValue : '/' }
       ]
     })
     .compileComponents();

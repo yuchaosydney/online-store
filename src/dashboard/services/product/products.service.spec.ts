@@ -1,14 +1,19 @@
 import { TestBed, inject } from '@angular/core/testing';
 
 import { ProductsService } from './products.service';
-import { HttpCallsService } from '../http-calls/http-calls.service';
+
 import { HttpModule } from '@angular/http';
+
+import * as fromPublicService from '../../../services';
 
 describe('ProductsService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpModule],
-      providers: [ProductsService, HttpCallsService]
+      providers: [
+        fromPublicService.HttpCallsService,
+        ProductsService,
+      ]
     });
   });
 

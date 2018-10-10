@@ -1,16 +1,15 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { StoreModule } from '@ngrx/store';
+import { RouterModule } from '@angular/router';
+import { APP_BASE_HREF } from '@angular/common';
+
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { BsModalService } from 'ngx-bootstrap/modal';
 
-import { reducer } from '../../store/reducers/products.reducer';
+import { reducers } from '../../store/reducers';
 
 import { DashboardComponent } from './dashboard.component';
-
-import { routes } from '../../app-routing.module';
-import { RouterTestingModule } from '@angular/router/testing';
-import { AuthComponent } from '../auth/auth.component';
 
 describe('DashboardComponent', () => {
   let component: DashboardComponent;
@@ -20,12 +19,16 @@ describe('DashboardComponent', () => {
     TestBed.configureTestingModule({
       imports: [
         ReactiveFormsModule,
+        RouterModule.forRoot([]),
         ModalModule.forRoot(),
-        StoreModule.forRoot({products: reducer}),
-        RouterTestingModule.withRoutes(routes)
+        StoreModule.forRoot({}),
+        StoreModule.forFeature('products', reducers)
       ],
-      declarations: [ DashboardComponent, AuthComponent ],
-      providers: [ BsModalService ]
+      declarations: [ DashboardComponent ],
+      providers: [
+        BsModalService,
+        {provide: APP_BASE_HREF, useValue : '/' }
+      ]
     })
     .compileComponents();
   }));
