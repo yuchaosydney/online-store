@@ -18,6 +18,7 @@ export class ProductFormComponent implements OnInit {
   isEditing: boolean;
   editingProduct: Product;
   files: string[];
+  sliderImages: Array<Object>;
 
   constructor(
     private appStore: Store<AppState>,
@@ -44,6 +45,10 @@ export class ProductFormComponent implements OnInit {
       this.editingProduct = new Product('', '', 0,  []);
 
     this.files = this.editingProduct.images;
+    this.sliderImages = this.editingProduct.images.map(image => ({
+      'image': image,
+      'thumbImage': image
+    }));
   }
 
   saveProduct() {
