@@ -17,7 +17,6 @@ import { EffectsModule } from '@ngrx/effects';
 import { storeFreeze } from 'ngrx-store-freeze';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
-
 // this would be done dynamically with webpack for builds
 const environment = {
   development: true,
@@ -48,7 +47,7 @@ const appInitializerFn = (appConfig: fromPublicService.AppConfigService) => {
 @NgModule({
   declarations: [
     AppComponent,
-    AuthComponent,
+    AuthComponent
   ],
   entryComponents: [],
   imports: [
