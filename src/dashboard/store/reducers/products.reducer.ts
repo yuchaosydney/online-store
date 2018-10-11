@@ -1,4 +1,4 @@
-import * as productActions from './../actions/products.actions';
+import * as fromActions from './../actions';
 import { Product } from '../../models/product';
 
 export interface ProductsState {
@@ -13,9 +13,9 @@ export const initialState: ProductsState = {
   loading: false
 };
 
-export function reducer(state = initialState, action: productActions.Action) {
+export function reducer(state = initialState, action: fromActions.Action) {
   switch (action.type) {
-    case productActions.LOAD_PRODUCTS_SUCCESS: {
+    case fromActions.LOAD_PRODUCTS_SUCCESS: {
       const products = action.payload;
 
       const entities = products.length ? products.reduce(
@@ -37,7 +37,7 @@ export function reducer(state = initialState, action: productActions.Action) {
         entities
       };
     }
-    case productActions.DELETE_PRODUCT_SUCCESS: {
+    case fromActions.DELETE_PRODUCT_SUCCESS: {
       const product = action.payload;
       const { [product._id]: removed, ...entities} = state.entities;
 
@@ -47,8 +47,8 @@ export function reducer(state = initialState, action: productActions.Action) {
         entities
       };
     }
-    case productActions.CREATE_PRODUCT_SUCCESS:
-    case productActions.EDIT_PRODUCT_SUCCESS:
+    case fromActions.CREATE_PRODUCT_SUCCESS:
+    case fromActions.EDIT_PRODUCT_SUCCESS:
     {
       const product = action.payload;
       const entities = {
@@ -60,9 +60,6 @@ export function reducer(state = initialState, action: productActions.Action) {
         ...state,
         entities
       };
-    }
-    case productActions.UPLOAD_IMAGE_FILES: {
-      return state;
     }
     default :  {
       return state;

@@ -3,36 +3,4 @@
   (drop)="onDrop($event)"
   (dragover)="onDragOver($event)">or drop files here</div>
 
-  <div class="container file-list">
-    <div class="row">
-      <div class="col-3">
-        File Name
-      </div>
-      <div class="col-8">
-        Progress
-      </div>
-      <div class="col-1">
-        &nbsp;
-      </div>
-    </div>
-    <div class="row" *ngFor="let file of fileList">
-      <div class="col-3">
-        <img class="file-drop-zone__file-img" *ngIf="!file.name" src="{{file}}" />
-        <p class="file-drop-zone__file-img" *ngIf="file.name">{{file.name}}</p>
-      </div>
-      <div class="col-7">
-        <!-- <progressbar [value]="file.uploadProgress" *ngIf="file.name" type="info" [striped]="true">{{file.uploadProgress}}%</progressbar> -->
-        <p *ngIf="!file.name" class="text-success">uploaded &#10004;</p>
-      </div>
-      <div class="col-2">
-        <button type="button" class="file-list__rm-btn btn btn-danger">&#10005;</button>
-      </div>
-    </div>
-
-    <div class="row--btn">
-      <button type="button" class="btn btn-primary" *ngIf="fileList && fileList.length > 0" (click)="uploadAllFiles($event)">Upload</button>
-    </div>
-
-  </div>
-
 </div>

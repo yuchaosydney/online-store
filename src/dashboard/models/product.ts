@@ -4,9 +4,9 @@ export class Product {
   sku: string;
   description: string;
   price: number;
-  images: Array<string>;
+  images: string[];
 
-  constructor(name: string, description: string, price: number, images: Array<string>, _id?: string, sku?: string) {
+  constructor(name: string, description: string, price: number, images: string[], _id?: string, sku?: string) {
     this.name = name;
     this.description = description;
     this.price = price;

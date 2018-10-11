@@ -3,7 +3,7 @@ import { Observable } from 'rxjs/Observable';
 import * as fromPublicService from '../../../services';
 
 import * as AWS from 'aws-sdk';
-import { concat } from 'rxjs/observable/concat';
+import { forkJoin } from 'rxjs/observable/forkJoin';
 
 import * as fromModel from '../../models/index';
 
@@ -51,16 +51,11 @@ export class FileService {
 
             observer.next(data.Location);
             observer.complete();
-          })
-          .on('httpUploadProgress', progress => {
-            const progressPercentage: number = progress.total ? progress.loaded * 100 / progress.total : 0;
-            file.uploadProgress = progressPercentage;
-            observer.next(file);
           });
         });
       })
     );
 
-    return concat(...fileUploadObservablesArray);
+    return forkJoin(...fileUploadObservablesArray);
   }
 }

@@ -13,6 +13,7 @@
     border: 2px dashed #555;
     border-radius: 7px;
     cursor: default;
+    transition: visibility 175ms, opacity 175ms;
     &:hover {
       color: #f00;
       border-color: #f00;
@@ -21,20 +22,4 @@
     }
   }
 
-  &__file-img {
-    max-width: 70px;
-  }
-
-  .file-list {
-    .row {
-      margin-bottom: 10px;
-      &--btn {
-        margin-top: 30px;
-      }
-    }
-
-    &__rm-btn {
-      width: 100%;
-    }
-  }
 }

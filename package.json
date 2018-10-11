@@ -29,7 +29,6 @@
     "core-js": "^2.5.7",
     "jasmine-marbles": "^0.2.0",
     "jwt-decode": "^2.2.0",
-    "ng-image-slider": "^1.0.1",
     "ngrx-store-freeze": "^0.2.4",
     "ngx-bootstrap": "^2.0.5",
     "rxjs": "^5.5.11",
