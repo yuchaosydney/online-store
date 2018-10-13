@@ -16,8 +16,8 @@ export class FileDropZoneComponent implements OnInit {
   @Input()
   existingFiles: String[] = [];
 
-  @Output()
-  newUploadedFile: EventEmitter<string> = new EventEmitter<string>();
+  @Output() uploadFilesSuccess: EventEmitter<string[]> = new EventEmitter<string[]>();
+  @Output() uploadFiles: EventEmitter<any> = new EventEmitter<any>();
 
   constructor(private fileService: fromService.FileService) {}
 
@@ -27,8 +27,7 @@ export class FileDropZoneComponent implements OnInit {
     event.preventDefault();
     const droppedFiles: Array<fromModel.UploadFile> = Object.keys(event.dataTransfer.files).map(key => event.dataTransfer.files[key]);
     droppedFiles.forEach(file => file.id = Math.random().toString(36).substr(2, 9));
-    this.fileList = this.fileList.length
-    ? [...this.fileList, ...droppedFiles] : droppedFiles;
+    this.uploadAllFiles(droppedFiles);
   }
 
   onDragOver(event: DragEvent) {
@@ -36,15 +35,10 @@ export class FileDropZoneComponent implements OnInit {
     event.preventDefault();
   }
 
-  uploadAllFiles(event: Event) {
-    event.preventDefault();
-    const uploadingFiles = Object.assign([], this.fileList.filter(file => file instanceof File));
-
-    this.fileService.uploadFiles(uploadingFiles).subscribe(val => {
-      if (typeof val === 'string') {
-        // get file name
-        this.newUploadedFile.emit(val);
-      }
+  private uploadAllFiles(files: fromModel.UploadFile[]) {
+    this.uploadFiles.emit('');
+    this.fileService.uploadFiles(files).subscribe((uploadedFiles: string[]) => {
+      this.uploadFilesSuccess.emit(uploadedFiles);
     });
   }
 }
