@@ -1,4 +1,4 @@
 export interface ProgressValueType {
-  id: string;
-  uploadProgress: number;
+  type: string;
+  value: number;
 }

@@ -1,11 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
 import * as fromModels from '../../models';
 
 import { Store } from '@ngrx/store';
 import { AppState } from '../../models/app-state';
 import * as productActions from '../../store/actions/products.actions';
+
+import * as fromStore from '../../store';
 
 @Component({
   selector: 'app-product-form',
@@ -21,7 +24,7 @@ export class ProductFormComponent implements OnInit {
   progressObj: fromModels.ProgressValueType;
 
   constructor(
-    private appStore: Store<AppState>,
+    private productsStore: Store<AppState>,
     public bsModalRef: BsModalRef,
     private fb: FormBuilder,
   ) {
@@ -32,7 +35,7 @@ export class ProductFormComponent implements OnInit {
     });
     this.isEditing = false;
     this.progressObj = {
-      type: 'uploading images',
+      type: '',
       value: 0
     };
   }
@@ -49,6 +52,20 @@ export class ProductFormComponent implements OnInit {
       this.editingProduct = new fromModels.Product('', '', 0,  []);
 
     this.files = this.editingProduct.images;
+
+   this.productsStore.select(fromStore.getProductSaving).subscribe(isProductSaving => {
+      if (isProductSaving) {
+        this.progressObj.value = 70;
+        this.progressObj.type = 'saving to the product';
+      }
+   });
+
+    this.productsStore.select(fromStore.getProductSaved).subscribe(isProductSaved => {
+      if (isProductSaved) {
+        this.progressObj.value = 100;
+        this.progressObj.type = 'success';
+      }
+    });
   }
 
   saveProduct() {
@@ -59,26 +76,24 @@ export class ProductFormComponent implements OnInit {
       description: this.productForm.value.description
     };
     if (this.isEditing) {
-      this.appStore.dispatch(new productActions.EditProductAction(this.editingProduct));
+      this.productsStore.dispatch(new productActions.EditProductAction(this.editingProduct));
     } else {
       const product = new fromModels.Product(this.editingProduct.name, this.editingProduct.description, this.editingProduct.price,  []);
-      this.appStore.dispatch(new productActions.CreateProductAction(product, this.bsModalRef));
+      this.productsStore.dispatch(new productActions.CreateProductAction(product, this.bsModalRef));
     }
   }
 
   uploadFiles($event: any) {
-    console.log('---start upload--------');
-    this.progressObj.value = 50;
+    this.progressObj.value = 30;   
+    this.progressObj.type = 'uploading image'; 
   }
 
   uploadFilesSuccess($event: string[]) {
-    console.log('---finish upload--------');
     this.editingProduct = {
       ...this.editingProduct,
       images: [...this.editingProduct.images, ...$event]
     };
-    this.appStore.dispatch(new productActions.EditProductAction(this.editingProduct));
-    this.progressObj.type = 'saving to the product';    
+    this.productsStore.dispatch(new productActions.EditProductAction(this.editingProduct));
   }
 
 }

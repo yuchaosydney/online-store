@@ -13,7 +13,6 @@ export const getProductsEntities = createSelector(
   fromProducts.getProductsEntities
 );
 
-
 export const getAllProducts = createSelector(getProductsEntities, entities => {
   return Object.keys(entities).map(_id => entities[_id]);
 });
@@ -21,4 +20,14 @@ export const getAllProducts = createSelector(getProductsEntities, entities => {
 export const getAllProductsLoaded = createSelector(
   getProductsState,
   fromProducts.getProductsLoaded
+);
+
+export const getProductSaving = createSelector(
+  getProductsState,
+  fromProducts.getProductSaving
+);
+
+export const getProductSaved = createSelector(
+  getProductsState,
+  fromProducts.getProductSaving
 );

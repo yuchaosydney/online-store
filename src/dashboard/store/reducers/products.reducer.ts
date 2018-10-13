@@ -5,16 +5,26 @@ export interface ProductsState {
   entities: { [id: number]: Product};
   loaded: boolean;
   loading: boolean;
+  productSaving: boolean;
+  productSaved: boolean;
 }
 
 export const initialState: ProductsState = {
   entities: {},
   loaded: false,
-  loading: false
+  loading: false,
+  productSaving: false,
+  productSaved: false,
 };
 
 export function reducer(state = initialState, action: fromActions.Action) {
   switch (action.type) {
+    case fromActions.LOAD_PRODUCTS: {
+      return {
+        ...state,
+        loading: true
+      }
+    }
     case fromActions.LOAD_PRODUCTS_SUCCESS: {
       const products = action.payload;
 
@@ -58,8 +68,18 @@ export function reducer(state = initialState, action: fromActions.Action) {
 
       return {
         ...state,
-        entities
+        entities,
+        productSaving: false,
+        productSaved: true
       };
+    }
+    case fromActions.CREATE_PRODUCT:
+    case fromActions.EDIT_PRODUCT:
+    {
+      return {
+        ...state,
+        productSaving: true
+      }
     }
     default :  {
       return state;
@@ -70,3 +90,5 @@ export function reducer(state = initialState, action: fromActions.Action) {
 export const getProductsEntities = (state: ProductsState) => state.entities;
 export const getProductsLoading = (state: ProductsState) => state.loading;
 export const getProductsLoaded = (state: ProductsState) => state.loaded;
+export const getProductSaving = (state: ProductsState) => state.productSaving;
+export const getProductSaved = (state: ProductsState) => state.productSaved;
