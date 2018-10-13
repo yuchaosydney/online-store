@@ -5,6 +5,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
+import { AngularFontAwesomeModule } from 'angular-font-awesome';
 
 import { reducers, effects } from './store';
 
@@ -32,6 +33,7 @@ export const ROUTES: Routes = [
   imports: [
     CommonModule,
     ReactiveFormsModule,
+    AngularFontAwesomeModule,
     RouterModule.forChild(ROUTES),
     ModalModule.forRoot(),
     ProgressbarModule.forRoot(),

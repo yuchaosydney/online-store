@@ -16,6 +16,7 @@
     <progressbar class="progress-striped active" [value]="progressObj.value" [type]="progressObj.type">{{progressObj.type}}</progressbar>
     <div class="form-group grid-container" *ngIf="editingProduct.images.length">
       <div class="grid-item" *ngFor="let img of editingProduct.images">
+        <fa class="grid-item__cross" name="close" size="1x"></fa>
         <img class="product-image" src="{{img}}"/>
       </div>
     </div>
