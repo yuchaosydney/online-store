@@ -10,6 +10,7 @@ import { reducers } from '../../store/reducers';
 
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
+import { ProgressbarModule } from 'ngx-bootstrap/progressbar';
 
 import * as fromServices from '../../services';
 import * as fromPublicService from '../../../services';
@@ -24,6 +25,7 @@ describe('ProductFormComponent', () => {
         ReactiveFormsModule,
         ModalModule,
         HttpModule,
+        ProgressbarModule.forRoot(),
         StoreModule.forRoot({}),
         StoreModule.forFeature('products', reducers)
       ],
