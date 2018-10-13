@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import { StoreModule } from '@ngrx/store';
 
 import { ProductFormComponent } from './product-form.component';
 import { FileDropZoneComponent } from '../file-drop-zone/file-drop-zone.component';
@@ -8,9 +9,7 @@ import { FileDropZoneComponent } from '../file-drop-zone/file-drop-zone.componen
 import { reducers } from '../../store/reducers';
 
 import { ModalModule } from 'ngx-bootstrap/modal';
-
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
-import { StoreModule } from '@ngrx/store';
 
 import * as fromServices from '../../services';
 import * as fromPublicService from '../../../services';

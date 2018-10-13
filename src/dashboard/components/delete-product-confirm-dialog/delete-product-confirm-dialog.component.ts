@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import {BsModalRef} from 'ngx-bootstrap';
-import {Product} from '../../models/product';
+import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
+import { Product } from '../../models/product';
 
 import { Store } from '@ngrx/store';
 import { AppState } from '../../models/app-state';
-import {DeleteProductAction} from '../../store/actions/products.actions';
+import { DeleteProductAction } from '../../store/actions/products.actions';
 
 @Component({
   selector: 'app-delete-product-confirm-dialog',
